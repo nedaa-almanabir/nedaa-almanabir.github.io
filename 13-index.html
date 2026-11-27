@@ -1,9 +1,0 @@
----
-layout: default
----
-<h2>مكتبة الخطب</h2>
-<label class="lbl" for="q">ابحث في الخطب</label><input id="q" type="search" autocomplete="off">
-<div class="chips" role="group" aria-label="الموضوع"><button type="button" class="chip on" data-t="">الكل</button>{% assign topics = site.sermons | map: "topic" | uniq | sort %}{% for tp in topics %}<button type="button" class="chip" data-t="{{ tp }}">{{ tp }}</button>{% endfor %}</div>
-<div id="list">{% for s in site.sermons %}<a class="row" href="{{ s.url | relative_url | remove_first: '/' }}" data-topic="{{ s.topic }}" data-text="{{ s.title }} {{ s.topic }} {{ s.summary }} {{ s.content | strip_html | normalize_whitespace | escape }}"><span class="rt"><b>{{ s.title }}</b><span>{{ s.summary }}</span></span><span class="rtag">{{ s.topic }}</span></a>{% endfor %}</div>
-<p id="empty" hidden>لا توجد خطبة بهذا البحث. جرّب كلمة أخرى.</p>
-<p class="count" id="count"></p>
