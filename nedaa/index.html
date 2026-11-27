@@ -121,6 +121,12 @@ body.dark .z.done{opacity:.4}
 .wbar{height:10px;border-radius:6px;background:#e8dcb5;overflow:hidden;margin:6px 0}
 .wbar i{display:block;height:100%;background:linear-gradient(90deg,#13745d,#b8902b)}
 body.dark .wbar{background:#2c3d36}
+#adhscr{position:fixed;inset:0;z-index:99999;display:none;background:#000 center/cover no-repeat;color:#fff;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:24px 20px 40px}
+#adhscr:before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.1) 55%,rgba(0,0,0,.35) 100%)}
+#adhscr>*{position:relative}
+#adhscr .an{font-size:34px;font-weight:700;margin-bottom:6px}#adhscr .at{font-size:20px;opacity:.9;margin-bottom:18px}
+#adhscr button{font:inherit;font-size:18px;padding:12px 22px;margin:5px;border-radius:14px;border:1px solid #e6c36a;background:rgba(0,0,0,.45);color:#fff}
+.calg{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;margin-top:8px}.calg div{padding:6px 0;border-radius:8px;font-size:15px;line-height:1.15}.calg small{display:block;font-size:11px;opacity:.7}.calg .h{font-size:12px;opacity:.7}.calg .t{outline:2px solid #c9a24a}.calg .f{background:rgba(201,162,74,.15)}
 </style>
 </head>
 <body>
@@ -149,6 +155,7 @@ body.dark .wbar{background:#2c3d36}
     <div class="tm" id="ntime"></div>
   </div>
   <div class="card" id="today" style="display:none"></div>
+  <div class="card" id="calcard"><div style="display:flex;justify-content:space-between;align-items:center"><button class="loc-btn" id="calnx">›</button><b id="calt" style="text-align:center"></b><button class="loc-btn" id="calpv">‹</button></div><div class="hint" id="calh" style="text-align:center"></div><div class="calg" id="calg"></div><div class="hint" style="text-align:center">التاريخ الهجري بحسب أم القرى، وقد يختلف يوماً عن رؤية الهلال في بلدك.</div></div>
   <div class="orn">۞ ۞ ۞</div>
   <div class="card" id="list"></div>
   <div class="hint" style="text-align:center;padding:0 16px 10px" id="mname"></div>
@@ -222,6 +229,13 @@ body.dark .wbar{background:#2c3d36}
     <div class="tg"><span>تذكير سورة الكهف يوم الجمعة</span><input type="checkbox" id="kahf" style="width:26px;height:26px"></div>
     <div class="tg"><span>وقت تذكير الكهف</span><input type="time" id="kht" class="s"></div>
   </div>
+  <div class="card"><b>صورة شاشة الأذان</b>
+    <div class="hint">تظهر صورة كاملة على الشاشة الرئيسية وقت الأذان وهذه الصور مدمجة في التطبيق وتعمل بدون إنترنت.</div>
+    <div class="tg"><span>إظهار الصورة وقت الأذان</span><input type="checkbox" id="aisw" style="width:26px;height:26px"></div>
+    <div class="tg"><span>الصورة</span><select class="s" id="aisel"></select></div>
+    <img id="aiprev" style="width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin-top:8px" alt="">
+    <button class="btn" id="aitest" style="margin-top:8px">تجربة الشاشة</button>
+  </div>
   <div class="card"><b>صوت التذكير (آيات)</b>
     <div class="hint">اختر تلاوة تُسمع مع التنبيه. الافتراضي: المعوذات مع أذكار الصباح والمساء.</div>
     <div class="tg"><span>أذكار الصباح والمساء</span><select class="s" id="raz"></select></div>
@@ -235,11 +249,13 @@ body.dark .wbar{background:#2c3d36}
     <p id="duatxt2" style="font-size:19px;line-height:2;text-align:center;color:#0b4f40"></p>
     <div class="hint">نص الدعاء الوارد في الحديث الصحيح (رواه البخاري). تسجيل الشيخ الشعراوي لهذا الدعاء محمي بحقوق النشر ولا يوجد له ترخيص مفتوح، لذلك لا يمكن تشغيله داخل التطبيق بدون إذن أصحاب الحقوق. الدعاء هنا نص فقط.</div>
   </div>
-  <div class="foot">الأذان (كلها من Wikimedia Commons): صباح فخري (ملك عام)؛ Adhan.ogg بواسطة Aishatu98 وBeautiful adhan.ogg بواسطة Adam-synagda (CC0)؛ Azan.ogg بواسطة Andrewler، The Adhan بواسطة Aaqib Azeez، Islamic call to worship بواسطة Mahfoudou، AzaanMaahur.ogg بواسطة Saeed Hatamzadeh-Varmazyar (CC BY-SA 4.0)؛ تسجيل المسجد النبوي بواسطة ejaz215 (CC BY 3.0). الأذانات المصرية (القاهرة) تسجيلات ميدانية من Freesound: حديقة الأزهر وخان الخليلي (CC0)، والمعادي ١ و٢ بواسطة AhmadAiuby (CC BY 4.0). وأذان فجر مكة من archive.org (CC0 حسب ما كتبه من رفعه). وأذانات إضافية من Wikimedia Commons: المسجد الحرام ٢٠١٢ بواسطة 3omar Faruq والمسجد الحرام ٢٠١٣ بواسطة Seyfula Islam وقونية بواسطة Frans van der Vaart (CC BY 3.0)، وإسطنبول بواسطة Viceskeeni2 (CC0)، وAthan in Ramadan بواسطة daSupremo (CC BY-SA 4.0). تم اقتطاع الأذان وضبط مستوى الصوت فقط. تلاوات التذكير من Wikimedia Commons: الفاتحة والمعوذات والضحى والشرح والعصر بواسطة Anasskoko (CC BY-SA 4.0، مقتطعة ومضبوطة المستوى)، وآية النور بواسطة PeaceSeekers (CC0). آية الكرسي في خيارات التذكير تُبث مباشرة من خدمة AlQuran Cloud (Islamic Network، cdn.islamic.network) ولا تُحفظ في التطبيق، وحقوق التلاوة لأصحابها، والاستخدام شخصي وتعليمي حسب شروط الخدمة (alquran.cloud/terms-and-conditions). هي تسجيلات لمساجد حقيقية بصوت الشارع ولا نعرف أسماء المؤذنين.<br>التلاوات والإذاعات: mp3quran.net (qurango.net). نص المصحف (رواية حفص، تقسيم صفحات المصحف المدني ٦٠٤ صفحة): Tanzil Project، رخصة CC BY 3.0، النص كما هو بدون تعديل، tanzil.net.</div>
+  <div class="foot">الأذان (كلها من Wikimedia Commons): صباح فخري (ملك عام)؛ Adhan.ogg بواسطة Aishatu98 وBeautiful adhan.ogg بواسطة Adam-synagda (CC0)؛ Azan.ogg بواسطة Andrewler، The Adhan بواسطة Aaqib Azeez، Islamic call to worship بواسطة Mahfoudou، AzaanMaahur.ogg بواسطة Saeed Hatamzadeh-Varmazyar (CC BY-SA 4.0)؛ تسجيل المسجد النبوي بواسطة ejaz215 (CC BY 3.0). الأذانات المصرية (القاهرة) تسجيلات ميدانية من Freesound: حديقة الأزهر وخان الخليلي (CC0)، والمعادي ١ و٢ بواسطة AhmadAiuby (CC BY 4.0). وأذان فجر مكة من archive.org (CC0 حسب ما كتبه من رفعه). وأذانات إضافية من Wikimedia Commons: المسجد الحرام ٢٠١٢ بواسطة 3omar Faruq والمسجد الحرام ٢٠١٣ بواسطة Seyfula Islam وقونية بواسطة Frans van der Vaart (CC BY 3.0)، وإسطنبول بواسطة Viceskeeni2 (CC0)، وAthan in Ramadan بواسطة daSupremo (CC BY-SA 4.0). تم اقتطاع الأذان وضبط مستوى الصوت فقط. تلاوات التذكير من Wikimedia Commons: الفاتحة والمعوذات والضحى والشرح والعصر بواسطة Anasskoko (CC BY-SA 4.0، مقتطعة ومضبوطة المستوى)، وآية النور بواسطة PeaceSeekers (CC0). آية الكرسي في خيارات التذكير تُحمَّل مرة واحدة من خدمة AlQuran Cloud (Islamic Network، cdn.islamic.network) إلى هاتفك عند اختيارها ثم تعمل بدون إنترنت، ولا نعيد نشرها، وحقوق التلاوة لأصحابها، والاستخدام شخصي وتعليمي حسب شروط الخدمة (alquran.cloud/terms-and-conditions). تلاوات القراء في تبويب القرآن من mp3quran.net (يسمح موقعهم بنسخ واستخدام أي مادة وروابطها)، ويمكن حفظ أي سورة على الجهاز من زر التحميل في المشغّل. صور شاشة الأذان من Wikimedia Commons (مقتطعة ومصغّرة): Masjid al-Haram 2022 بواسطة مريم محمد الغلبان (CC0)؛ صحن الجامع الأزهر بواسطة Vyacheslav Argenberg (CC BY 4.0)؛ المسجد الأقصى وقبة الصخرة بواسطة Godot13 (CC BY-SA 4.0)؛ المسجد النبوي بواسطة TheHadiRahim (CC0)؛ جامع محمد علي بواسطة Middle East Minorities (CC BY 4.0)؛ مسجد السلطان حسن بواسطة Hassan Hamdy wahidy (ملك عام). هي تسجيلات لمساجد حقيقية بصوت الشارع ولا نعرف أسماء المؤذنين.<br>التلاوات والإذاعات: mp3quran.net (qurango.net). نص المصحف (رواية حفص، تقسيم صفحات المصحف المدني ٦٠٤ صفحة): Tanzil Project، رخصة CC BY 3.0، النص كما هو بدون تعديل، tanzil.net.</div>
 </section>
+<div id="adhscr"><div class="an" id="adhn"></div><div class="at" id="adht"></div><div><button id="adhstop">⏹ إيقاف الأذان</button><button id="adhclose">إغلاق</button></div></div>
 <div id="bar">
   <div class="r1"><div class="tt" id="btt"></div><button id="bx">✕</button></div>
   <div class="r1" id="seekrow"><span class="tm" id="tcur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0"><span class="tm" id="tdur">0:00</span></div>
+  <div class="r1" id="dlrow" style="display:none"><button id="dlb" style="flex:1;padding:8px;border-radius:10px;border:1px solid #c9a24a;background:transparent;color:inherit;font:inherit">⬇ حفظ على الجهاز للاستماع بدون إنترنت</button></div>
   <div class="ctl"><select id="spd"><option value="0.75">٠٫٧٥×</option><option value="1" selected>١×</option><option value="1.25">١٫٢٥×</option><option value="1.5">١٫٥×</option><option value="2">٢×</option></select>
     <button id="bfw" title="تقديم ١٠ ثوان">⏩</button><button id="bnx">⏭</button><button id="bpp">⏸</button><button id="bpv">⏮</button><button id="bbk" title="رجوع ١٠ ثوان">⏪</button></div>
 </div>
@@ -485,11 +501,20 @@ document.getElementById("treset").onclick=function(){tc=0;localStorage.setItem("
 
 // ---------- audio ----------
 var au=document.getElementById("au"),bar=document.getElementById("bar"),queue=null;
+document.getElementById("dlb").addEventListener("click",function(){var b=this,u=curRemote;if(!u||dlOk(u))return;dlGet(u);b.textContent="جارٍ التحميل...";var n=0,t=setInterval(function(){var st="";try{st=window.NedaaNative.dlState(dlName(u))}catch(e){}n++;if(st==="ok"){clearInterval(t);b.textContent="✔ محفوظ على الجهاز (يعمل بدون إنترنت)"}else if(st==="err"||n>900){clearInterval(t);b.textContent="تعذر التحميل، حاول مع الإنترنت"}},2000)});
 function mmss(t){if(!isFinite(t))return"مباشر";t=Math.floor(t);return Math.floor(t/60)+":"+(t%60<10?"0":"")+t%60}
+var NATV=!!window.NedaaNative;
+function dlName(u){var h=0;for(var i=0;i<u.length;i++)h=(h*31+u.charCodeAt(i))|0;return"r"+(h>>>0).toString(16)+".mp3"}
+function dlOk(u){try{return NATV&&window.NedaaNative.dlState(dlName(u))==="ok"}catch(e){return false}}
+function dlGet(u){try{if(NATV&&/^https?:/.test(u)&&!dlOk(u))window.NedaaNative.dlStart(u,dlName(u))}catch(e){}}
+function dlLocal(u){return"file://"+window.NedaaNative.dlPath(dlName(u))}
+var curRemote="";
 function play(url,title,q){
+  curRemote="";if(NATV&&/^https?:/.test(url)&&q){curRemote=url;if(dlOk(url))url=dlLocal(url)}
   queue=q||null;au.src=url;au.playbackRate=+document.getElementById("spd").value;au.play().catch(function(){});
   document.getElementById("btt").textContent=title;bar.style.display="flex";document.body.style.paddingBottom="230px";
   var live=!q;document.getElementById("seekrow").style.display=live?"none":"flex";
+  (function(){var r=document.getElementById("dlrow"),b=document.getElementById("dlb");r.style.display=(NATV&&curRemote)?"flex":"none";if(curRemote)b.textContent=dlOk(curRemote)?"✔ محفوظ على الجهاز (يعمل بدون إنترنت)":"⬇ حفظ على الجهاز للاستماع بدون إنترنت"})();
   ["bpv","bnx","bfw","bbk"].forEach(function(i){document.getElementById(i).style.display=live?"none":""});
   if("mediaSession"in navigator){
     navigator.mediaSession.metadata=new MediaMetadata({title:title,artist:"نداء",album:"نداء"});
@@ -758,9 +783,11 @@ fillSelects();
 adh.checked=ST.adh;psel.value=ST.pre;dtg.checked=ST.dua;azt.checked=ST.azk;amt.value=ST.am;pmt.value=ST.pmT;qyt.checked=ST.qym;$("kahf").checked=ST.kahf;$("kht").value=ST.kt;$("kahf").onchange=$("kht").onchange=save;
 $("duaaud").addEventListener("change",function(){ST.duaAudio=$("duaaud").value;save()});
 [adh,msel,psel,dtg,azt,amt,pmt,qyt].forEach(function(e){e.addEventListener("change",save)});
+function dlRem(){["raz","rap","raq","rak"].forEach(function(k){var v=ST[k]||"";if(v.indexOf("u:")===0)dlGet(v.slice(2))})}
+setTimeout(dlRem,3000);setInterval(dlRem,6*3600*1000);
 (function(){["raz","rap","raq","rak"].forEach(function(k){var el=$(k);function fill(){var cur=ST[k]||"";el.innerHTML=raOpts().map(function(r){return'<option value="'+r[0]+'">'+esc(r[1])+'</option>'}).join("");el.value=cur;if(el.value!==cur)el.value=""}fill();
 el.addEventListener("focus",fill);el.addEventListener("mousedown",fill);
-el.addEventListener("change",function(){ST[k]=el.value;localStorage.setItem("nedaa_st",JSON.stringify(ST));pushNative();var u=raUrl(el.value);if(u){try{var a=new Audio(u);a.play().catch(function(){});setTimeout(function(){a.pause()},6000)}catch(e){}}})})})();
+el.addEventListener("change",function(){ST[k]=el.value;dlRem();localStorage.setItem("nedaa_st",JSON.stringify(ST));pushNative();var u=raUrl(el.value);if(u){try{var a=new Audio(u);a.play().catch(function(){});setTimeout(function(){a.pause()},6000)}catch(e){}}})})})();
 
 function mzFor(k){var v=ST.pm[k];return(v!==-1&&muValid(v))?v:(muValid(ST.mz)?ST.mz:0)}
 var adhanAudio=new Audio(),curK=null;
@@ -897,6 +924,32 @@ setInterval(tick,1000);
 setInterval(function(){if(ymd(Date.now(),loc.tz).join("-")!==dayKey)compute()},30000);
 (function(){var h=location.hash.replace("#","").split("/");if(h[0]&&h[1]){show(h[0],h[1]);if(h[2])readSurah(+h[2])}})();
 if("serviceWorker"in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js");
+
+// ---------- adhan screen image + calendar ----------
+var AIMG=[["img/p1.jpg","الكعبة المشرفة (المسجد الحرام)","Masjid al-Haram 2022.jpg بواسطة مريم محمد الغلبان (CC0)"],["img/p2.jpg","الجامع الأزهر","The Courtyard of Al-Azhar Mosque, Cairo, Egypt.jpg بواسطة Vyacheslav Argenberg (CC BY 4.0)"],["img/p3.jpg","المسجد الأقصى","Al-Aqsa Mosque (Temple Mount, Jerusalem, 2008).jpg بواسطة Godot13 (CC BY-SA 4.0)"],["img/p4.jpg","قبة الصخرة","Dome of the Rock, South Facade (2008) 06.jpg بواسطة Godot13 (CC BY-SA 4.0)"],["img/p5.jpg","المسجد النبوي","Wide shot of the Green Dome at The Prophet's Mosque.jpg بواسطة TheHadiRahim (CC0)"],["img/p6.jpg","جامع محمد علي (القلعة)","Mosque of Muhammad Ali, Cairo Citadel, 2020.jpg بواسطة Middle East Minorities (CC BY 4.0)"],["img/p7.jpg","مسجد السلطان حسن","Sultan Hassan Mosque, Cairo, Egypt 04.jpg بواسطة Hassan Hamdy wahidy (ملك عام)"]];
+if(ST.ai===undefined)ST.ai=0;if(ST.ais===undefined)ST.ais=true;
+(function(){var sel=$("aisel"),sw=$("aisw"),pv=$("aiprev");sel.innerHTML=AIMG.map(function(x,i){return'<option value="'+i+'">'+x[1]+'</option>'}).join("");sel.value=ST.ai;sw.checked=ST.ais;pv.src=AIMG[ST.ai||0][0];
+function sv(){ST.ai=+sel.value;ST.ais=sw.checked;pv.src=AIMG[ST.ai][0];localStorage.setItem("nedaa_st",JSON.stringify(ST))}
+sel.addEventListener("change",sv);sw.addEventListener("change",sv);$("aitest").onclick=function(){showAdhScr("الأذان","تجربة")}})();
+function showAdhScr(name,time){var a=AIMG[ST.ai]||AIMG[0],e=$("adhscr");e.style.backgroundImage="url("+a[0]+")";$("adhn").textContent=name;$("adht").textContent=time||"";e.style.display="flex"}
+$("adhclose").onclick=function(){$("adhscr").style.display="none"};
+$("adhstop").onclick=function(){try{if(window.NedaaNative&&window.NedaaNative.stopAdhan)window.NedaaNative.stopAdhan()}catch(e){}try{stopAdhan()}catch(e){}$("adhscr").style.display="none"};
+var scrShown={};
+setInterval(function(){if(!ST.adh||!ST.ais)return;var n=Date.now();buildEvents(1).forEach(function(e){if(e.ty!=="adhan")return;var dt=n-e.t;if(dt>=0&&dt<4*60000&&!scrShown[e.t]){scrShown[e.t]=1;showAdhScr("حان الآن موعد أذان "+NAMES[e.k],fmt(new Date(e.t)))}})},3000);
+// calendar
+var calM=null;
+function calDraw(){var t=ymd(Date.now(),loc.tz);if(!calM)calM={y:t[0],m:t[1]};var y=calM.y,m=calM.m;
+var first=new Date(Date.UTC(y,m,1)),dim=new Date(Date.UTC(y,m+1,0)).getUTCDate();
+var gm=new Intl.DateTimeFormat("ar-EG",{month:"long",year:"numeric",timeZone:"UTC"}).format(first);$("calt").textContent=gm;
+var h1=hijri(Date.UTC(y,m,1,12)),h2=hijri(Date.UTC(y,m,dim,12));var hn=function(h){try{return new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(Date.UTC(y,m,h===h1?1:dim,12)))}catch(e){return""}};
+$("calh").textContent=h1&&h2?hn(h1)+(h1.month!==h2.month?" - "+hn(h2):""):"";
+var D=["س","ح","ن","ث","ر","خ","ج"],s="";D.forEach(function(d){s+='<div class="h">'+d+'</div>'});
+var off=(first.getUTCDay()+1)%7;for(var i=0;i<off;i++)s+="<div></div>";
+for(var d=1;d<=dim;d++){var hh=hijri(Date.UTC(y,m,d,12)),dow=(off+d-1)%7,cl=(t[0]===y&&t[1]===m&&t[2]===d?" t":"")+(dow===6?" f":"");s+='<div class="'+cl.trim()+'">'+ad(d)+'<small>'+(hh?ad(hh.day):"")+'</small></div>'}
+$("calg").innerHTML=s}
+$("calpv").onclick=function(){calDraw();calM.m--;if(calM.m<0){calM.m=11;calM.y--}calDraw()};
+$("calnx").onclick=function(){calDraw();calM.m++;if(calM.m>11){calM.m=0;calM.y++}calDraw()};
+try{calDraw()}catch(e){}
 </script>
 </body>
 </html>
