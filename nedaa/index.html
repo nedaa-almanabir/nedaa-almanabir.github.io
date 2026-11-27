@@ -6,7 +6,7 @@
 <title>نداء</title>
 <meta name="theme-color" content="#0b4f40">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="favicon.png"><link rel="icon" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -127,6 +127,13 @@ body.dark .wbar{background:#2c3d36}
 #adhscr .an{font-size:34px;font-weight:700;margin-bottom:6px}#adhscr .at{font-size:20px;opacity:.9;margin-bottom:18px}
 #adhscr button{font:inherit;font-size:18px;padding:12px 22px;margin:5px;border-radius:14px;border:1px solid #e6c36a;background:rgba(0,0,0,.45);color:#fff}
 .calg{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;margin-top:8px}.calg div{padding:6px 0;border-radius:8px;font-size:15px;line-height:1.15}.calg small{display:block;font-size:11px;opacity:.7}.calg .h{font-size:12px;opacity:.7}.calg .t{outline:2px solid #c9a24a}.calg .f{background:rgba(201,162,74,.15)}
+.rosw{position:relative;width:min(86vw,320px);aspect-ratio:1;margin:6px auto}.rosw svg{width:100%;height:100%}
+#tbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58%;aspect-ratio:1;border-radius:50%;border:3px solid #c9a24a;background:radial-gradient(circle at 35% 30%,#17806a,#0b4f40);color:#fff;font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+#tbtn b{font-size:44px;line-height:1.1}#tbtn small{font-size:15px;line-height:1.35;opacity:.95;max-height:3.8em;overflow:hidden}
+.ptb{display:flex;gap:6px;justify-content:space-between;margin-top:8px}.ptb button{flex:1;padding:10px 2px;border-radius:12px;border:1px solid #c9a24a;background:transparent;color:inherit;font:inherit;font-size:14px}.ptb button.on{background:#0b4f40;color:#fff}
+.pst{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;margin-top:10px;font-size:12px}.pst div{padding:6px 0;border-radius:8px;background:rgba(201,162,74,.12)}.pst .full{background:#0b4f40;color:#fff}
+.nsg{display:grid;grid-template-columns:1fr 70px 70px;gap:4px 8px;align-items:center;margin-top:6px}
+#t-tasbeeh .tg,#t-tasbeeh .card{max-width:100%;box-sizing:border-box}#t-tasbeeh select.s{min-width:0;max-width:62%;flex:1;text-overflow:ellipsis}#t-tasbeeh .tg span{flex:none}
 </style>
 </head>
 <body>
@@ -158,6 +165,14 @@ body.dark .wbar{background:#2c3d36}
   <div class="card" id="calcard"><div style="display:flex;justify-content:space-between;align-items:center"><button class="loc-btn" id="calnx">›</button><b id="calt" style="text-align:center"></b><button class="loc-btn" id="calpv">‹</button></div><div class="hint" id="calh" style="text-align:center"></div><div class="calg" id="calg"></div><div class="hint" style="text-align:center">التاريخ الهجري بحسب أم القرى، وقد يختلف يوماً عن رؤية الهلال في بلدك.</div></div>
   <div class="orn">۞ ۞ ۞</div>
   <div class="card" id="list"></div>
+  <div class="card" id="ptcard"><b>متابعة الصلوات</b><div class="hint">اضغط على الصلاة بعد ما تصليها.</div><div class="ptb" id="ptb"></div><div class="pst" id="pst"></div><div class="hint" id="ptsum" style="text-align:center"></div></div>
+  <div class="card" id="fastcard"><b>الصيام</b><div class="hint" id="fhint"></div>
+    <div style="display:flex;justify-content:space-around;text-align:center;margin:8px 0"><div><div class="hint">الإمساك (قبل الفجر ١٠ د)</div><b id="fims" style="font-size:22px;direction:ltr;display:block">--:--:--</b></div><div><div class="hint">الإفطار (المغرب)</div><b id="fift" style="font-size:22px;direction:ltr;display:block">--:--:--</b></div></div>
+    <div class="ptb"><button id="ftod">صمت اليوم</button></div>
+    <div class="tg"><span>عدد أيام الصيام المسجلة</span><b id="ftot">٠</b></div>
+    <div class="tg"><span>أيام قضاء رمضان المتبقية</span><span><button class="btn" id="fq-" style="padding:4px 14px">−</button> <b id="fq">٠</b> <button class="btn" id="fq+" style="padding:4px 14px">+</button></span></div>
+  </div>
+  <div class="card" id="qdcard"><b>سجل قضاء الصلوات</b><div class="hint">سجّل الصلوات الفائتة التي عليك قضاؤها، واطرح واحدة كلما قضيتها.</div><div id="qdl"></div><div class="hint" id="qdt" style="text-align:center"></div></div>
   <div class="hint" style="text-align:center;padding:0 16px 10px" id="mname"></div>
 </section>
 
@@ -168,6 +183,7 @@ body.dark .wbar{background:#2c3d36}
     <div class="dial" id="dial"><div class="n">ش</div><div class="needle" id="needle"></div></div>
     <button class="btn" id="compass">تشغيل البوصلة</button>
     <div class="hint" id="chint">على الموبايل: شغّل البوصلة وضع الجهاز أفقياً، وسيدور السهم نحو الكعبة. بدون بوصلة استخدم الزاوية المكتوبة من الشمال.</div>
+    <div class="hint" id="qdecl"></div><div class="hint">للمعايرة: حرّك الهاتف في الهواء على شكل رقم ٨ عدة مرات، وابتعد عن المعادن والمغناطيس.</div>
   </div>
 </section>
 
@@ -178,9 +194,17 @@ body.dark .wbar{background:#2c3d36}
 
 <section class="tab" id="t-tasbeeh" data-g="azkar">
   <div class="card tasbeeh">
-    <div class="hint">اضغط الدائرة للتسبيح</div>
-    <button class="big" id="tbtn">0</button>
+    <div class="tg"><span>الورد</span><select class="s" id="tsw"></select></div>
+    <div class="tg"><span>العدد</span><select class="s" id="tsc"><option value="0">حسب الورد</option><option value="33">٣٣</option><option value="99">٩٩</option><option value="-1">عدد آخر</option></select><input id="tscu" type="number" min="1" max="100000" class="s" style="display:none;width:90px"></div>
+    <div class="rosw"><svg id="tsvg" viewBox="0 0 300 300"></svg><button id="tbtn"><b id="tcnt">٠</b><small id="tdh"></small></button></div>
+    <div class="hint" id="tinfo" style="text-align:center"></div>
     <button class="btn" id="treset">تصفير</button>
+  </div>
+  <div class="card" id="tswc" style="display:none"><b>ويدجت السبحة</b>
+    <div class="hint">سبحة صغيرة على الشاشة الرئيسية، الضغطة تعدّ، وعند اكتمال العدد تنتقل للذكر التالي تلقائياً. الحالة مشتركة مع التطبيق.</div>
+    <div class="tg"><span>تفعيل الويدجت</span><input type="checkbox" id="tswon" style="width:26px;height:26px"></div>
+    <button class="btn" id="tswadd">إضافة الويدجت للشاشة الرئيسية</button>
+    <div class="hint" id="tswmsg"></div>
   </div>
 </section>
 
@@ -228,6 +252,28 @@ body.dark .wbar{background:#2c3d36}
     <div class="tg"><span>تنبيه قيام الليل (بداية الثلث الأخير)</span><input type="checkbox" id="qym" style="width:26px;height:26px"></div>
     <div class="tg"><span>تذكير سورة الكهف يوم الجمعة</span><input type="checkbox" id="kahf" style="width:26px;height:26px"></div>
     <div class="tg"><span>وقت تذكير الكهف</span><input type="time" id="kht" class="s"></div>
+  </div>
+  <div class="card"><b>نمط الأذان لكل صلاة</b>
+    <div class="hint">صوت الأذان، أو اهتزاز مع إشعار فقط، أو إشعار صامت. تنبيه قبل الأذان من بطاقة التنبيهات.</div>
+    <div class="nsg" id="mdg" style="grid-template-columns:1fr 140px"></div>
+    <div class="tg" style="margin-top:8px"><span>تعديل التاريخ الهجري</span><select class="s" id="hadjs"><option value="-1">يوم أقل</option><option value="0">بدون</option><option value="1">يوم أكثر</option></select></div>
+  </div>
+  <div class="card"><b>تعديل مواقيت الصلاة بالدقائق</b>
+    <div class="hint">اضبط كل صلاة بزيادة أو نقص دقائق (من ١٠- إلى ١٠+) لتوافق مسجدك.</div>
+    <div class="nsg" id="adjg" style="grid-template-columns:1fr 110px"></div>
+  </div>
+  <div class="card"><b>إعدادات التنبيهات</b>
+    <div class="hint">اختر التنبيهات لكل صلاة. الأذان الرئيسي وباقي التذكيرات (الأذكار وقيام الليل والكهف وقبل الصلاة) من البطاقة اللي فوق.</div>
+    <div class="nsg" id="nsg"></div>
+    <button class="btn" id="nsys" style="display:none;margin-top:8px">صوت واهتزاز التنبيهات (إعدادات أندرويد)</button>
+  </div>
+  <div class="card" id="rlc" style="display:none"><b>هل الأذان يشتغل بشكل موثوق؟</b>
+    <div class="hint">فحص سريع للإعدادات التي توقف الأذان في بعض الهواتف.</div>
+    <div id="rlx" style="line-height:2"></div>
+    <button class="btn" id="rlb1" style="margin-top:6px">السماح بالمنبهات الدقيقة</button>
+    <button class="btn" id="rlb2" style="margin-top:6px">استثناء التطبيق من توفير البطارية</button>
+    <button class="btn" id="rlb3" style="margin-top:6px">معلومات التطبيق (التشغيل التلقائي / الإذن)</button>
+    <div class="hint">في هواتف شاومي وهواوي وأوبو وسامسونج: فعّل «التشغيل التلقائي» ومنع إغلاق التطبيق في الخلفية من إعدادات الهاتف. الأذان يظهر كمنبه في شريط الحالة لأنه مجدول كمنبه نظام. لا نستخدم إعلانات ولا تتبع ولا حساب.</div>
   </div>
   <div class="card"><b>صورة شاشة الأذان</b>
     <div class="hint">تظهر صورة كاملة على الشاشة الرئيسية وقت الأذان وهذه الصور مدمجة في التطبيق وتعمل بدون إنترنت.</div>
@@ -327,7 +373,8 @@ function sunPos(jd){
   var eq=q/15-RA;if(eq>12)eq-=24;if(eq<-12)eq+=24;
   return {decl:asin(sin(e)*sin(L)),eqt:eq};
 }
-function times(y,m,dd,lat,lon,tz,meth){
+function times(){var r=times0.apply(null,arguments),a=(typeof ST!=="undefined"&&ST.adj)||{};for(var k in a){if(r[k]&&a[k])r[k]=new Date(r[k].getTime()+a[k]*60000)}return r}
+function times0(y,m,dd,lat,lon,tz,meth){
   var base=Date.UTC(y,m,dd),tzo=tzOff(tz,base+12*36e5-tzoffGuess(tz,base));
   var jd=(base+12*36e5)/864e5+2440587.5-lon/360;
   var sp=sunPos(jd),decl=sp.decl,eqt=sp.eqt;
@@ -355,7 +402,7 @@ function compute(){
   today=times(t[0],t[1],t[2],loc.lat,loc.lon,loc.tz,loc.m);
   tom=times(t[0],t[1],t[2]+1,loc.lat,loc.lon,loc.tz,loc.m);
   var df=new Intl.DateTimeFormat("ar-EG",{timeZone:loc.tz||undefined,weekday:"long",day:"numeric",month:"long"}).format(n);
-  var hj="";try{hj=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{timeZone:loc.tz||undefined,day:"numeric",month:"long",year:"numeric"}).format(n)}catch(e){}
+  var hj="";try{hj=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{timeZone:loc.tz||undefined,day:"numeric",month:"long",year:"numeric"}).format(n+hadjD()*864e5)}catch(e){}
   document.getElementById("dates").textContent=df+(hj?" • "+hj:"");
   document.getElementById("locname").textContent="📍 "+loc.name;
   document.getElementById("mname").textContent="طريقة الحساب: "+METHODS[loc.m].n;
@@ -441,7 +488,7 @@ function onori(e){
   var h=null;
   if(typeof e.webkitCompassHeading==="number")h=e.webkitCompassHeading;
   else if(e.alpha!==null&&e.alpha!==undefined&&(e.absolute||e.type==="deviceorientationabsolute"))h=360-e.alpha;
-  if(h!==null){heading=h;rot()}
+  if(h!==null){h=(h+DECL+360)%360;heading=h;rot()}
 }
 document.getElementById("compass").onclick=function(){
   var go=function(){
@@ -492,11 +539,7 @@ function renderAz(){
     l.appendChild(d);
   });
 }
-// tasbeeh
-var tc=parseInt(localStorage.getItem("nedaa_t")||"0",10)||0;
-var tb=document.getElementById("tbtn");tb.textContent=ad(tc);
-tb.onclick=function(){tc++;localStorage.setItem("nedaa_t",tc);tb.textContent=ad(tc);if(navigator.vibrate)navigator.vibrate(10)};
-document.getElementById("treset").onclick=function(){tc=0;localStorage.setItem("nedaa_t",0);tb.textContent=ad(0)};
+// tasbeeh: see rosary section
 
 
 // ---------- audio ----------
@@ -819,8 +862,8 @@ function buildEvents(days){
   for(var d=-1;d<days;d++){
     var x=times(t[0],t[1],t[2]+d,loc.lat,loc.lon,loc.tz,loc.m),y=times(t[0],t[1],t[2]+d+1,loc.lat,loc.lon,loc.tz,loc.m);
     PR.forEach(function(k){if(!x[k])return;var T=x[k].getTime();
-      if(ST.adh)ev.push({t:T,ty:"adhan",k:k,mz:mzFor(k),title:"حان الآن موعد أذان "+NAMES[k],body:ST.dua?DUA:"",});
-      if(ST.pre>0)ev.push({t:T-ST.pre*60000,ty:"pre",k:k,mz:0,title:"اقترب موعد صلاة "+NAMES[k],body:"باقي "+ad(ST.pre)+" دقيقة على أذان "+NAMES[k]})});
+      if(ST.adh&&(ST.ap||{})[k]!==false){var md=(ST.md||{})[k]||"sound";ev.push({t:T,ty:md==="sound"?"adhan":(md==="vib"?"vib":"quiet"),k:k,mz:mzFor(k),title:"حان الآن موعد أذان "+NAMES[k],body:md==="sound"?(ST.dua?DUA:""):"حان وقت الصلاة"})}
+      if(ST.pre>0&&(ST.pp||{})[k]!==false)ev.push({t:T-ST.pre*60000,ty:"pre",k:k,mz:0,title:"اقترب موعد صلاة "+NAMES[k],body:"باقي "+ad(ST.pre)+" دقيقة على أذان "+NAMES[k]})});
     if(ST.azk){var a=ST.am.split(":"),b=ST.pmT.split(":");
       ev.push({t:atLocal(t[0],t[1],t[2]+d,+a[0],+a[1]),ty:"azkar",k:"m",mz:0,title:"أذكار الصباح",body:"حان وقت أذكار الصباح، افتح التطبيق وسبّح"});
       ev.push({t:atLocal(t[0],t[1],t[2]+d,+b[0],+b[1]),ty:"azkar",k:"e",mz:0,title:"أذكار المساء",body:"حان وقت أذكار المساء، افتح التطبيق وسبّح"})}
@@ -905,7 +948,8 @@ $("thbtn").onclick=function(){TH=TH==="auto"?"dark":TH==="dark"?"light":"auto";l
 if(window.matchMedia)try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",applyTheme)}catch(e){}
 applyTheme();
 // ---------- today card: Ramadan + Friday Kahf ----------
-function hijri(ms){try{var p=new Intl.DateTimeFormat("en-u-ca-islamic-umalqura",{day:"numeric",month:"numeric",year:"numeric",timeZone:loc.tz}).formatToParts(ms),o={};p.forEach(function(x){o[x.type]=+x.value});return o}catch(e){return null}}
+function hadjD(){return (typeof ST!=="undefined"&&ST.hadj)||0}
+function hijri(ms){ms+=hadjD()*864e5;try{var p=new Intl.DateTimeFormat("en-u-ca-islamic-umalqura",{day:"numeric",month:"numeric",year:"numeric",timeZone:loc.tz}).formatToParts(ms),o={};p.forEach(function(x){o[x.type]=+x.value});return o}catch(e){return null}}
 function renderToday(){
   var b=$("today"),h="",n=Date.now(),t=ymd(n,loc.tz);
   var hj=hijri(n);
@@ -950,6 +994,88 @@ $("calg").innerHTML=s}
 $("calpv").onclick=function(){calDraw();calM.m--;if(calM.m<0){calM.m=11;calM.y--}calDraw()};
 $("calnx").onclick=function(){calDraw();calM.m++;if(calM.m>11){calM.m=0;calM.y++}calDraw()};
 try{calDraw()}catch(e){}
+
+// ---------- per-prayer notification settings ----------
+(function(){var g=$("nsg"),P=["fajr","dhuhr","asr","maghrib","isha"];if(!ST.ap)ST.ap={};if(!ST.pp)ST.pp={};
+var h='<b></b><b style="font-size:12px;text-align:center">أذان</b><b style="font-size:12px;text-align:center">قبل الصلاة</b>';
+P.forEach(function(k){h+='<span>'+NAMES[k]+'</span><input type="checkbox" data-a="'+k+'" style="width:24px;height:24px;margin:auto"><input type="checkbox" data-p="'+k+'" style="width:24px;height:24px;margin:auto">'});
+g.innerHTML=h;g.querySelectorAll("input").forEach(function(e){var k=e.dataset.a||e.dataset.p,o=e.dataset.a?ST.ap:ST.pp;e.checked=o[k]!==false;e.addEventListener("change",function(){o[k]=e.checked;localStorage.setItem("nedaa_st",JSON.stringify(ST));pushNative()})});
+if(window.NedaaNative&&window.NedaaNative.openNotifSettings){$("nsys").style.display="block";$("nsys").onclick=function(){try{window.NedaaNative.openNotifSettings()}catch(e){}}}})();
+// ---------- prayer tracking ----------
+var PT=lj("nedaa_pt",{});
+function ptDay(off){var t=ymd(Date.now(),loc.tz),d=new Date(Date.UTC(t[0],t[1],t[2]+(off||0)));return d.getUTCFullYear()+"-"+(d.getUTCMonth()+1)+"-"+d.getUTCDate()}
+function ptGet(k){return PT[k]||[0,0,0,0,0]}
+function ptDraw(){var P=["fajr","dhuhr","asr","maghrib","isha"],k=ptDay(0),cur=ptGet(k),h="";
+P.forEach(function(p,i){h+='<button data-i="'+i+'" class="'+(cur[i]?"on":"")+'">'+(cur[i]?"✔ ":"")+NAMES[p]+'</button>'});$("ptb").innerHTML=h;
+$("ptb").querySelectorAll("button").forEach(function(b){b.onclick=function(){var c=ptGet(k).slice();c[+b.dataset.i]=c[+b.dataset.i]?0:1;PT[k]=c;localStorage.setItem("nedaa_pt",JSON.stringify(PT));ptDraw()}});
+var D=["س","ح","ن","ث","ر","خ","ج"],st="",tot=0,full=0;
+for(var o=-6;o<=0;o++){var kk=ptDay(o),c=ptGet(kk),n=c.reduce(function(a,b){return a+b},0),dt=new Date(Date.UTC.apply(null,kk.split("-").map(function(x,i){return i==1?+x-1:+x})));st+='<div class="'+(n===5?"full":"")+'">'+D[(dt.getUTCDay()+1)%7]+'<br>'+ad(n)+'/٥</div>';tot+=n;if(n===5)full++}
+$("pst").innerHTML=st;
+var streak=0;for(var o2=0;o2>-400;o2--){var c2=ptGet(ptDay(o2));if(c2.every(function(x){return x})){streak++}else if(o2===0){continue}else break}
+$("ptsum").textContent="آخر ٧ أيام: "+ad(tot)+" من ٣٥ صلاة، وأيام كاملة: "+ad(full)+"، وأيام متتالية كاملة: "+ad(streak)}
+try{ptDraw()}catch(e){}
+// ---------- rosary tasbih ----------
+var TSD=[["salat","تسبيح الصلاة: سبحان الله ٣٣ ثم الحمد لله ٣٣ ثم الله أكبر ٣٣",[["سُبْحَانَ اللَّهِ",33],["الْحَمْدُ لِلَّهِ",33],["اللَّهُ أَكْبَرُ",33]]],
+["s100","سبحان الله وبحمده",[["سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",33]]],["ist","أستغفر الله",[["أَسْتَغْفِرُ اللَّهَ",33]]],["lail","لا إله إلا الله",[["لَا إِلَهَ إِلَّا اللَّهُ",33]]],
+["sal","الصلاة على النبي",[["اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ",33]]],["hq","لا حول ولا قوة إلا بالله",[["لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",33]]],
+["free","تسبيح حر بدون عدّ",[["سُبْحَانَ اللَّهِ",0]]]];
+var TS=lj("nedaa_ts",{k:"salat",cn:0,i:0,c:0,r:0,t:0});
+if(TS.cn===100)TS.cn=0;
+function tsDef(){return TSD.filter(function(d){return d[0]===TS.k})[0]||TSD[0]}
+function tsSeq(){var d=tsDef();return d[2].map(function(x){return[x[0],(TS.cn>0&&x[1]>0)?TS.cn:x[1]]})}
+function tsSave(push){localStorage.setItem("nedaa_ts",JSON.stringify(TS));if(push!==false)tsPush()}
+function tsPush(){try{if(window.NedaaNative&&window.NedaaNative.tsSet)window.NedaaNative.tsSet(JSON.stringify({seq:tsSeq(),i:TS.i,c:TS.c,r:TS.r,t:TS.t}))}catch(e){}}
+function tsPull(){try{if(window.NedaaNative&&window.NedaaNative.tsGet){var j=JSON.parse(window.NedaaNative.tsGet()||"null");if(j&&typeof j.i==="number"){TS.i=j.i;TS.c=j.c;TS.r=j.r;TS.t=j.t;tsSave(false);tsDraw()}}}catch(e){}}
+function tsDraw(){var q=tsSeq();if(TS.i>=q.length)TS.i=0;var st=q[TS.i],n=st[1],svg="",B=n>0?Math.min(n,33):33,filled=n>0?Math.floor(TS.c*B/n):(TS.c%33);
+for(var b=0;b<B;b++){var a=b/B*2*Math.PI-Math.PI/2,x=150+118*Math.cos(a),y=150+118*Math.sin(a),f=b<filled;svg+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(b===0?10:8)+'" fill="'+(f?"#c9a24a":"#0b4f40")+'" stroke="#c9a24a" stroke-width="2"/>'}
+svg+='<circle cx="150" cy="150" r="118" fill="none" stroke="#c9a24a" stroke-opacity=".25" stroke-width="2"/><path d="M150 14v-10" stroke="#c9a24a" stroke-width="4"/><ellipse cx="150" cy="30" rx="6" ry="9" fill="#c9a24a" transform="translate(0,-26)"/>';
+$("tsvg").innerHTML=svg;$("tcnt").textContent=ad(TS.c)+(n>0?" / "+ad(n):"");$("tdh").textContent=st[0];
+$("tinfo").textContent=(q.length>1?"الذكر "+ad(TS.i+1)+" من "+ad(q.length)+" • ":"")+"ورد كامل: "+ad(TS.r)+" • الإجمالي: "+ad(TS.t)}
+$("tbtn").onclick=function(){var q=tsSeq(),n=q[Math.min(TS.i,q.length-1)][1];TS.c++;TS.t++;
+if(n>0&&TS.c>=n){TS.c=0;TS.i++;if(TS.i>=q.length){TS.i=0;TS.r++}if(navigator.vibrate)navigator.vibrate([70,40,70])}else if(navigator.vibrate)navigator.vibrate(12);tsSave();tsDraw()};
+$("treset").onclick=function(){TS.c=0;TS.i=0;tsSave();tsDraw()};
+(function(){var w=$("tsw"),c=$("tsc"),u=$("tscu");w.innerHTML=TSD.map(function(d){return'<option value="'+d[0]+'">'+d[1]+'</option>'}).join("");w.value=TS.k;
+c.value=[0,33,99].indexOf(TS.cn)>=0?String(TS.cn):"-1";u.style.display=c.value==="-1"?"":"none";u.value=TS.cn>0?TS.cn:"";
+w.onchange=function(){TS.k=w.value;TS.i=0;TS.c=0;tsSave();tsDraw()};
+c.onchange=function(){if(c.value==="-1"){u.style.display="";u.focus();return}u.style.display="none";TS.cn=+c.value;TS.i=0;TS.c=0;tsSave();tsDraw()};
+u.onchange=function(){var v=Math.max(1,Math.min(100000,+u.value||0));TS.cn=v;TS.i=0;TS.c=0;tsSave();tsDraw()}})();
+tsDraw();tsPush();
+document.addEventListener("visibilitychange",function(){if(!document.hidden)tsPull()});window.addEventListener("focus",tsPull);setTimeout(tsPull,500);
+(function(){var N=window.NedaaNative;if(!N||!N.tsSet)return;$("tswc").style.display="block";var on=$("tswon"),msg=$("tswmsg");try{on.checked=N.tsWidgetEnabled()}catch(e){on.checked=true}
+on.onchange=function(){try{N.tsWidgetEnable(on.checked)}catch(e){}msg.textContent=on.checked?"الويدجت متاح في قائمة الويدجت.":"تم إخفاء الويدجت (وإزالته من الشاشة)."};
+$("tswadd").onclick=function(){var r="";try{r=N.pinTasbih()}catch(e){r="err"}msg.textContent=r==="ok"?"ظهرت رسالة من أندرويد لإضافة الويدجت، وافق عليها.":"جهازك ما يدعم الإضافة المباشرة: اضغط مطولاً على الشاشة الرئيسية، ثم الويدجت، ثم «نداء سبحة»."}})();
+
+(function(){var N=window.NedaaNative;if(!N||!N.canExact)return;$("rlc").style.display="block";
+function ck(){var e=false,b=false;try{e=N.canExact();b=N.battOk()}catch(x){}$("rlx").innerHTML=(e?"✔":"✖")+" المنبهات الدقيقة "+(e?"مسموحة":"غير مسموحة")+"<br>"+(b?"✔":"✖")+" استثناء توفير البطارية "+(b?"مفعّل":"غير مفعّل (يُنصح به)")+"<br>✔ يُعاد جدولة الأذان بعد إعادة التشغيل وتغيير الوقت أو المنطقة والتحديث";$("rlb1").style.display=e?"none":"block";$("rlb2").style.display=b?"none":"block"}
+ck();$("rlb1").onclick=function(){N.openExactAlarm()};$("rlb2").onclick=function(){N.openBattery()};$("rlb3").onclick=function(){N.openAppInfo()};
+document.addEventListener("visibilitychange",function(){if(!document.hidden)ck()})})();
+
+(function(){var g=$("adjg");if(!g)return;if(!ST.adj)ST.adj={};var h="";["fajr","dhuhr","asr","maghrib","isha"].forEach(function(k){var o="";for(var d=-10;d<=10;d++)o+='<option value="'+d+'">'+(d>0?"+":"")+d+' د</option>';h+='<span>'+NAMES[k]+'</span><select class="s" data-k="'+k+'">'+o+'</select>'});g.innerHTML=h;
+g.querySelectorAll("select").forEach(function(e){e.value=String(ST.adj[e.dataset.k]||0);e.onchange=function(){ST.adj[e.dataset.k]=+e.value;localStorage.setItem("nedaa_st",JSON.stringify(ST));location.reload()}})})();
+
+// ---------- qibla declination ----------
+var DECL=0;(function(){try{if(window.NedaaNative&&NedaaNative.decl){DECL=+NedaaNative.decl(loc.lat,loc.lon)||0;$("qdecl").textContent="تم تصحيح الانحراف المغناطيسي لموقعك: "+ad(Math.round(DECL*10)/10)+"°"}else $("qdecl").textContent="في المتصفح لا يتوفر تصحيح الانحراف المغناطيسي، استخدم نسخة الأندرويد."}catch(e){}})();
+// ---------- per-prayer mode + hijri adjust ----------
+(function(){if(!ST.md)ST.md={};var g=$("mdg"),h="";["fajr","dhuhr","asr","maghrib","isha"].forEach(function(k){h+='<span>'+NAMES[k]+'</span><select class="s" data-k="'+k+'"><option value="sound">صوت الأذان</option><option value="vib">اهتزاز فقط</option><option value="silent">صامت</option></select>'});g.innerHTML=h;
+g.querySelectorAll("select").forEach(function(e){e.value=({vib:"vib",silent:"silent"})[ST.md[e.dataset.k]]||"sound";e.onchange=function(){ST.md[e.dataset.k]=e.value==="silent"?"silent":e.value;localStorage.setItem("nedaa_st",JSON.stringify(ST));pushNative()}});
+var hs=$("hadjs");hs.value=String(ST.hadj||0);hs.onchange=function(){ST.hadj=+hs.value;localStorage.setItem("nedaa_st",JSON.stringify(ST));location.reload()}})();
+// ---------- qada log ----------
+var QD=lj("nedaa_qd",{fajr:0,dhuhr:0,asr:0,maghrib:0,isha:0});
+function qdDraw(){var h="",t=0;["fajr","dhuhr","asr","maghrib","isha"].forEach(function(k){t+=QD[k]||0;h+='<div class="tg"><span>'+NAMES[k]+'</span><span><button class="btn" data-k="'+k+'" data-d="-1" style="padding:4px 14px">−</button> <b>'+ad(QD[k]||0)+'</b> <button class="btn" data-k="'+k+'" data-d="1" style="padding:4px 14px">+</button></span></div>'});
+$("qdl").innerHTML=h;$("qdt").textContent="المجموع: "+ad(t);$("qdl").querySelectorAll("button").forEach(function(b){b.onclick=function(){QD[b.dataset.k]=Math.max(0,(QD[b.dataset.k]||0)+ +b.dataset.d);localStorage.setItem("nedaa_qd",JSON.stringify(QD));qdDraw()}})}
+qdDraw();
+// ---------- fasting ----------
+var FS=lj("nedaa_fs",{days:{},q:0});
+function fsDraw(){var k=ptDay(0),on=!!FS.days[k];$("ftod").className=on?"on":"";$("ftod").textContent=on?"✔ صمت اليوم":"صمت اليوم";$("ftot").textContent=ad(Object.keys(FS.days).length);$("fq").textContent=ad(FS.q||0);
+var t=ymd(Date.now(),loc.tz),d=new Date(Date.UTC(t[0],t[1],t[2])),wd=d.getUTCDay(),hh=hijri(Date.UTC(t[0],t[1],t[2],12)),msg="";
+if(hh&&hh.month===9)msg="شهر رمضان";else if(hh&&hh.day>=13&&hh.day<=15)msg="من الأيام البيض (١٣ و١٤ و١٥)";else if(wd===1||wd===4)msg="اليوم "+(wd===1?"الاثنين":"الخميس")+" وهو يوم يُستحب صيامه";else{var nx=[1,4].map(function(w){return(w-wd+7)%7||7}).sort(function(a,b){return a-b})[0];msg="أقرب يوم مستحب: بعد "+ad(nx)+" يوم (الاثنين أو الخميس)"}
+$("fhint").textContent=msg}
+$("ftod").onclick=function(){var k=ptDay(0);if(FS.days[k])delete FS.days[k];else FS.days[k]=1;localStorage.setItem("nedaa_fs",JSON.stringify(FS));fsDraw()};
+$("fq-").onclick=function(){FS.q=Math.max(0,(FS.q||0)-1);localStorage.setItem("nedaa_fs",JSON.stringify(FS));fsDraw()};$("fq+").onclick=function(){FS.q=(FS.q||0)+1;localStorage.setItem("nedaa_fs",JSON.stringify(FS));fsDraw()};
+function cdf(ms){if(ms<0)ms=0;var s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60,z=function(v){return(v<10?"0":"")+v};return z(h)+":"+z(m)+":"+z(x)}
+function fsTick(){try{var n=Date.now(),t=ymd(n,loc.tz),a=[];for(var d=0;d<2;d++){var x=times(t[0],t[1],t[2]+d,loc.lat,loc.lon,loc.tz,loc.m);a.push([x.fajr.getTime()-6e5,x.maghrib.getTime()])}
+var ims=a.map(function(z){return z[0]}).filter(function(v){return v>n})[0],ift=a.map(function(z){return z[1]}).filter(function(v){return v>n})[0];$("fims").textContent=cdf(ims-n);$("fift").textContent=cdf(ift-n)}catch(e){}}
+fsDraw();fsTick();setInterval(fsTick,1000);
 </script>
 </body>
 </html>
