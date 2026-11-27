@@ -222,13 +222,20 @@ body.dark .wbar{background:#2c3d36}
     <div class="tg"><span>تذكير سورة الكهف يوم الجمعة</span><input type="checkbox" id="kahf" style="width:26px;height:26px"></div>
     <div class="tg"><span>وقت تذكير الكهف</span><input type="time" id="kht" class="s"></div>
   </div>
+  <div class="card"><b>صوت التذكير (آيات)</b>
+    <div class="hint">اختر تلاوة تُسمع مع التنبيه. الافتراضي: المعوذات مع أذكار الصباح والمساء.</div>
+    <div class="tg"><span>أذكار الصباح والمساء</span><select class="s" id="raz"></select></div>
+    <div class="tg"><span>قبل الصلاة</span><select class="s" id="rap"></select></div>
+    <div class="tg"><span>قيام الليل</span><select class="s" id="raq"></select></div>
+    <div class="tg"><span>سورة الكهف (الجمعة)</span><select class="s" id="rak"></select></div>
+  </div>
   <div class="card"><b>دعاء بعد الأذان</b>
     <div class="tg"><span>إظهار الدعاء بعد انتهاء الأذان</span><input type="checkbox" id="duat" style="width:26px;height:26px"></div>
     <div class="tg"><span>صوت الدعاء (من صوتياتي)</span><select class="s" id="duaaud"><option value="">بدون صوت</option></select></div>
     <p id="duatxt2" style="font-size:19px;line-height:2;text-align:center;color:#0b4f40"></p>
     <div class="hint">نص الدعاء الوارد في الحديث الصحيح (رواه البخاري). تسجيل الشيخ الشعراوي لهذا الدعاء محمي بحقوق النشر ولا يوجد له ترخيص مفتوح، لذلك لا يمكن تشغيله داخل التطبيق بدون إذن أصحاب الحقوق. الدعاء هنا نص فقط.</div>
   </div>
-  <div class="foot">الأذان (كلها من Wikimedia Commons): صباح فخري (ملك عام)؛ Adhan.ogg بواسطة Aishatu98 وBeautiful adhan.ogg بواسطة Adam-synagda (CC0)؛ Azan.ogg بواسطة Andrewler، The Adhan بواسطة Aaqib Azeez، Islamic call to worship بواسطة Mahfoudou، AzaanMaahur.ogg بواسطة Saeed Hatamzadeh-Varmazyar (CC BY-SA 4.0)؛ تسجيل المسجد النبوي بواسطة ejaz215 (CC BY 3.0). الأذانات المصرية (القاهرة) تسجيلات ميدانية من Freesound: حديقة الأزهر وخان الخليلي (CC0)، والمعادي ١ و٢ بواسطة AhmadAiuby (CC BY 4.0). وأذان فجر مكة من archive.org (CC0 حسب ما كتبه من رفعه). هي تسجيلات لمساجد حقيقية بصوت الشارع ولا نعرف أسماء المؤذنين.<br>التلاوات والإذاعات: mp3quran.net (qurango.net). نص المصحف (رواية حفص، تقسيم صفحات المصحف المدني ٦٠٤ صفحة): Tanzil Project، رخصة CC BY 3.0، النص كما هو بدون تعديل، tanzil.net.</div>
+  <div class="foot">الأذان (كلها من Wikimedia Commons): صباح فخري (ملك عام)؛ Adhan.ogg بواسطة Aishatu98 وBeautiful adhan.ogg بواسطة Adam-synagda (CC0)؛ Azan.ogg بواسطة Andrewler، The Adhan بواسطة Aaqib Azeez، Islamic call to worship بواسطة Mahfoudou، AzaanMaahur.ogg بواسطة Saeed Hatamzadeh-Varmazyar (CC BY-SA 4.0)؛ تسجيل المسجد النبوي بواسطة ejaz215 (CC BY 3.0). الأذانات المصرية (القاهرة) تسجيلات ميدانية من Freesound: حديقة الأزهر وخان الخليلي (CC0)، والمعادي ١ و٢ بواسطة AhmadAiuby (CC BY 4.0). وأذان فجر مكة من archive.org (CC0 حسب ما كتبه من رفعه). وأذانات إضافية من Wikimedia Commons: المسجد الحرام ٢٠١٢ بواسطة 3omar Faruq والمسجد الحرام ٢٠١٣ بواسطة Seyfula Islam وقونية بواسطة Frans van der Vaart (CC BY 3.0)، وإسطنبول بواسطة Viceskeeni2 (CC0)، وAthan in Ramadan بواسطة daSupremo (CC BY-SA 4.0). تم اقتطاع الأذان وضبط مستوى الصوت فقط. تلاوات التذكير من Wikimedia Commons: الفاتحة والمعوذات والضحى والشرح والعصر بواسطة Anasskoko (CC BY-SA 4.0، مقتطعة ومضبوطة المستوى)، وآية النور بواسطة PeaceSeekers (CC0). هي تسجيلات لمساجد حقيقية بصوت الشارع ولا نعرف أسماء المؤذنين.<br>التلاوات والإذاعات: mp3quran.net (qurango.net). نص المصحف (رواية حفص، تقسيم صفحات المصحف المدني ٦٠٤ صفحة): Tanzil Project، رخصة CC BY 3.0، النص كما هو بدون تعديل، tanzil.net.</div>
 </section>
 <div id="bar">
   <div class="r1"><div class="tt" id="btt"></div><button id="bx">✕</button></div>
@@ -658,7 +665,15 @@ var MUEZ=[["adhan/a2.mp3","صباح فخري (سوريا، ملك عام)","Wiki
 ["adhan/a10.mp3","القاهرة: المعادي ١ (تسجيل ميداني)","Freesound: Adhan in Maadi by AhmadAiuby، CC BY 4.0"],
 ["adhan/a11.mp3","القاهرة: المعادي ٢ (تسجيل ميداني)","Freesound: Pandemic Adhan - Maadi by AhmadAiuby، CC BY 4.0"],
 ["adhan/a12.mp3","القاهرة: خان الخليلي (تسجيل قصير)","Freesound: 3bagbrew، CC0"],
-["adhan/a13.mp3","أذان فجر مكة المكرمة (تسجيل)","archive.org: 28MayFajrAdhanMakkah، CC0 حسب المرفوع"]];
+["adhan/a13.mp3","أذان فجر مكة المكرمة (تسجيل)","archive.org: 28MayFajrAdhanMakkah، CC0 حسب المرفوع"],
+["adhan/a14.mp3","أذان المغرب، المسجد الحرام (٢٠١٢)","Wikimedia Commons: Maghrib Adhan at the Masjid al Haram بواسطة 3omar Faruq، CC BY 3.0"],
+["adhan/a15.mp3","أذان المسجد الحرام (٢٠١٣)","Wikimedia Commons: Adhan, Great Mosque of Mecca بواسطة Seyfula Islam، CC BY 3.0"],
+["adhan/a16.mp3","أذان قونية (تركيا)","Wikimedia Commons: Hminsec150 Konya بواسطة Frans van der Vaart، CC BY 3.0"],
+["adhan/a17.mp3","أذان إسطنبول","Wikimedia Commons: Adhan in Istanbul بواسطة Viceskeeni2، CC0"],
+["adhan/a18.mp3","أذان رمضان (daSupremo)","Wikimedia Commons: Athan in Ramadan بواسطة daSupremo، CC BY-SA 4.0"]];
+var RAY=[["","بدون صوت"],["ayat/r1.mp3","المعوذات (الإخلاص والفلق والناس)"],["ayat/r2.mp3","سورة الفاتحة"],["ayat/r3.mp3","آية النور (٣٥ النور)"],["ayat/r4.mp3","سورة الضحى"],["ayat/r5.mp3","سورة الشرح"],["ayat/r6.mp3","سورة العصر"]];
+var RAK={raz:"azkar",rap:"pre",raq:"qiyam",rak:"kahf"};
+function raFor(e){var k=e.ty==="azkar"?(e.k==="kahf"?"rak":"raz"):(e.ty==="pre"?"rap":(e.ty==="qiyam"?"raq":""));return k?(ST[k]||""):""}
 var IBT=[];
 function drawIbt(){var L=IBT.concat(UA.filter(function(x){return x.kind==="ibt"&&uaUrl[x.id]}).map(function(x){return[uaUrl[x.id],x.name+" (من صوتياتي)"]}));
 var b=document.getElementById("ibtlist"),s="";L.forEach(function(x,i){s+='<div class="item" data-i="'+i+'"><span>'+esc(x[1])+'</span><small>▶</small></div>'});b.innerHTML=s||'<div class="msg">لا توجد ابتهالات مدمجة. أضف ابتهالاتك من «صوتياتي» تحت.</div>';
@@ -716,6 +731,7 @@ function refreshUA(){
 var PR=["fajr","dhuhr","asr","maghrib","isha"];
 var DUA="اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ";
 var ST={duaAudio:"",adh:false,mz:0,pm:{fajr:-1,dhuhr:-1,asr:-1,maghrib:-1,isha:-1},pre:10,dua:true,azk:false,am:"06:00",pmT:"17:30",qym:false,kahf:false,kt:"09:00"};
+ST.raz="ayat/r1.mp3";ST.rap="";ST.raq="";ST.rak="";
 try{var s1=JSON.parse(localStorage.getItem("nedaa_st"));if(s1)for(var kk in s1)ST[kk]=s1[kk]}catch(e){}
 if(localStorage.getItem("nedaa_adhan")==="1"&&!localStorage.getItem("nedaa_st")){ST.adh=true;ST.mz=+(localStorage.getItem("nedaa_muez")||0)}
 function $(i){return document.getElementById(i)}
@@ -739,6 +755,9 @@ fillSelects();
 adh.checked=ST.adh;psel.value=ST.pre;dtg.checked=ST.dua;azt.checked=ST.azk;amt.value=ST.am;pmt.value=ST.pmT;qyt.checked=ST.qym;$("kahf").checked=ST.kahf;$("kht").value=ST.kt;$("kahf").onchange=$("kht").onchange=save;
 $("duaaud").addEventListener("change",function(){ST.duaAudio=$("duaaud").value;save()});
 [adh,msel,psel,dtg,azt,amt,pmt,qyt].forEach(function(e){e.addEventListener("change",save)});
+(function(){["raz","rap","raq","rak"].forEach(function(k){var el=$(k);el.innerHTML=RAY.map(function(r){return'<option value="'+r[0]+'">'+r[1]+'</option>'}).join("");el.value=ST[k]||"";
+el.addEventListener("change",function(){ST[k]=el.value;localStorage.setItem("nedaa_st",JSON.stringify(ST));pushNative();if(el.value){try{var a=new Audio(el.value);a.play().catch(function(){});setTimeout(function(){a.pause()},6000)}catch(e){}}})})})();
+
 function mzFor(k){var v=ST.pm[k];return(v!==-1&&muValid(v))?v:(muValid(ST.mz)?ST.mz:0)}
 var adhanAudio=new Audio(),curK=null;
 adh.addEventListener("change",function(){if(adh.checked){adhanAudio.src=muSrc(msel.value);adhanAudio.volume=0;adhanAudio.play().then(function(){adhanAudio.pause();adhanAudio.volume=1}).catch(function(){adhanAudio.volume=1})}});
@@ -755,11 +774,11 @@ function offState(){
   var el=$("offst");
   if(location.protocol==="file:"){el.textContent="✔ كل الأذانات مضمّنة داخل التطبيق وتعمل بدون إنترنت";$("offbtn").style.display="none";return}
   if(!("caches"in window)){el.textContent="المتصفح لا يدعم الحفظ بدون إنترنت";return}
-  caches.open("nedaa-adhan").then(function(c){return c.keys()}).then(function(k){el.textContent=k.length>=MUEZ.length?"✔ كل الأذانات ("+ad(MUEZ.length)+") محفوظة للاستخدام بدون إنترنت":"غير محفوظة بالكامل بعد ("+ad(k.length)+" من "+ad(MUEZ.length)+")"});
+  caches.open("nedaa-adhan").then(function(c){return c.keys()}).then(function(k){el.textContent=k.length>=MUEZ.length+6?"✔ كل الأذانات ("+ad(MUEZ.length)+") والتلاوات محفوظة للاستخدام بدون إنترنت":"غير محفوظة بالكامل بعد ("+ad(k.length)+" من "+ad(MUEZ.length+6)+")"});
 }
 $("offbtn").onclick=function(){
   var b=this;b.textContent="جاري الحفظ...";
-  caches.open("nedaa-adhan").then(function(c){return Promise.all(MUEZ.map(function(m){return c.add(m[0])}))}).then(function(){b.textContent="تم الحفظ";offState()}).catch(function(){b.textContent="تعذر الحفظ، حاول مع الإنترنت"});
+  caches.open("nedaa-adhan").then(function(c){return Promise.all(MUEZ.map(function(m){return c.add(m[0])}).concat(RAY.filter(function(r){return r[0]}).map(function(r){return c.add(r[0])})))}).then(function(){b.textContent="تم الحفظ";offState()}).catch(function(){b.textContent="تعذر الحفظ، حاول مع الإنترنت"});
 };
 offState();
 // ---------- reminders ----------
@@ -779,6 +798,7 @@ function buildEvents(days){
     if(ST.qym&&x.maghrib&&y.fajr){var ni=y.fajr.getTime()-x.maghrib.getTime();
       ev.push({t:y.fajr.getTime()-Math.round(ni/3),ty:"qiyam",k:"q",mz:0,title:"قيام الليل",body:"بدأ الثلث الأخير من الليل، وقت القيام والدعاء والاستغفار"})}
   }
+  ev.forEach(function(e){if(e.ty!=="adhan")e.au=raFor(e)});
   return ev;
 }
 function askNotif(){if(window.NedaaNative)return;if("Notification"in window&&Notification.permission==="default")try{Notification.requestPermission()}catch(e){}}
@@ -792,7 +812,7 @@ function pushNative(){
   if(!window.NedaaNative)return;
   var n=Date.now(),nm=function(v){if(typeof v==="string"){var x=UA.filter(function(z){return"u"+z.id.slice(1)===v})[0];return x?"f:"+uaFile(x):"0"}return String(v)},
     dn=function(){var x=UA.filter(function(z){return z.id===ST.duaAudio})[0];return x?"f:"+uaFile(x):""},
-    ev=buildEvents(7).filter(function(e){return e.t>n}).map(function(e){return[e.t,e.ty,e.title,e.body,e.ty==="adhan"?nm(e.mz):"0",e.ty==="adhan"?dn():""]});
+    ev=buildEvents(7).filter(function(e){return e.t>n}).map(function(e){return[e.t,e.ty,e.title,e.body,e.ty==="adhan"?nm(e.mz):"0",e.ty==="adhan"?dn():(e.au?"a:"+e.au:"")]});
   try{window.NedaaNative.schedule(JSON.stringify(ev),ev.length>0,0)}catch(e){}
   try{var wl=[],t0=ymd(n,loc.tz);for(var d=-1;d<4;d++){var xx=times(t0[0],t0[1],t0[2]+d,loc.lat,loc.lon,loc.tz,loc.m);PR.forEach(function(k){if(xx[k]&&xx[k].getTime()>n-36e5)wl.push([xx[k].getTime(),NAMES[k],fmt(xx[k])])})}
     window.NedaaNative.widget(JSON.stringify(wl))}catch(e){}
@@ -804,7 +824,7 @@ setInterval(function(){
   var n=Date.now();
   buildEvents(1).forEach(function(e){var dt=n-e.t,key=e.ty+e.k+e.t;
     if(dt>=0&&dt<60000&&!firedS[key]){firedS[key]=1;
-      if(e.ty==="adhan")playAdhan(e.k);else notify(e.title,e.body)}});
+      if(e.ty==="adhan")playAdhan(e.k);else{notify(e.title,e.body);if(e.au)try{var ra=new Audio(e.au);ra.play().catch(function(){})}catch(x){}}}});
 },5000);
 
 // ---------- mushaf extras: bookmarks, search, wird ----------
