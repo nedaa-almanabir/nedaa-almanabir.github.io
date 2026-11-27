@@ -63,6 +63,10 @@ input.s,select.s{width:calc(100% - 28px);margin:0 14px 12px;padding:11px;border:
 .mush{font-family:"Amiri","Noto Naskh Arabic","Traditional Arabic","Geeza Pro",serif;font-size:25px;line-height:2.3;text-align:justify}
 .mush .bs{text-align:center;color:#0b4f40;font-size:26px;margin-bottom:6px}
 .mush .an{color:#b8902b;font-size:20px;white-space:nowrap}
+.mush .sh{text-align:center;background:linear-gradient(90deg,#fff3d0,#f0d48a,#fff3d0);border:1px solid #b8902b;border-radius:10px;color:#0b4f40;font-weight:700;margin:10px 0;line-height:2}
+.mush.pg{min-height:62vh}
+@keyframes slL{from{transform:translateX(-40px);opacity:.2}to{transform:none;opacity:1}}
+@keyframes slR{from{transform:translateX(40px);opacity:.2}to{transform:none;opacity:1}}
 .back{background:none;border:0;color:#0b4f40;font:inherit;font-size:16px;padding:4px 0 10px}
 #bar{position:fixed;bottom:calc(62px + env(safe-area-inset-bottom));left:10px;right:10px;background:#0b4f40;color:#fff;border-radius:16px;padding:8px 14px;display:none;align-items:center;gap:10px;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 #bar .tt{flex:1;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
@@ -176,6 +180,15 @@ body{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
     <hr style="border:0;border-top:1px solid #eee6d3;margin:14px 0">
     <div class="hint" id="offst"></div>
     <button class="btn" id="offbtn" style="background:#b8902b">حفظ كل الأذانات للاستخدام بدون إنترنت</button></div>
+  <div class="card"><b>صوتياتي (من جهازك)</b>
+    <p class="hint">اختر ملفات صوتية من تليفونك (مثلاً أذان أو دعاء أو ابتهال تملكه أو مسموح لك باستخدامه). تُحفظ على جهازك فقط داخل التطبيق ولا يتم رفعها لأي مكان، وتعمل بدون إنترنت.</p>
+    <div class="tg"><span>إضافة كـ</span><select class="s" id="uakind"><option value="adhan">مؤذن (أذان)</option><option value="dua">دعاء بعد الأذان</option><option value="ibt">ابتهال / إنشاد</option></select></div>
+    <input type="file" id="uafile" accept="audio/*,.mp3,.m4a,.aac,.ogg,.wav,.opus" multiple style="display:none">
+    <button class="btn" id="uabtn" style="margin-top:8px">+ اختيار ملفات صوتية</button>
+    <div class="hint" id="uast"></div>
+    <div id="ualist"></div>
+    <div class="hint">بعد الإضافة: الأذان يظهر في قائمة المؤذنين (الافتراضي أو لكل صلاة)، والدعاء تختاره من بطاقة «دعاء بعد الأذان»، والابتهال يظهر في قائمة الابتهالات.</div>
+  </div>
   <div class="card"><b>تنبيهات</b>
     <div class="tg"><span>تنبيه قبل الصلاة بـ</span><select class="s" id="pre"><option value="0">إيقاف</option><option value="5">٥ دقائق</option><option value="10">١٠ دقائق</option><option value="15">١٥ دقيقة</option><option value="20">٢٠ دقيقة</option><option value="30">٣٠ دقيقة</option></select></div>
     <div class="tg"><span>تذكير بأذكار الصباح والمساء</span><input type="checkbox" id="azk" style="width:26px;height:26px"></div>
@@ -185,10 +198,11 @@ body{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   </div>
   <div class="card"><b>دعاء بعد الأذان</b>
     <div class="tg"><span>إظهار الدعاء بعد انتهاء الأذان</span><input type="checkbox" id="duat" style="width:26px;height:26px"></div>
+    <div class="tg"><span>صوت الدعاء (من صوتياتي)</span><select class="s" id="duaaud"><option value="">بدون صوت</option></select></div>
     <p id="duatxt2" style="font-size:19px;line-height:2;text-align:center;color:#0b4f40"></p>
     <div class="hint">نص الدعاء الوارد في الحديث الصحيح (رواه البخاري). تسجيل الشيخ الشعراوي لهذا الدعاء محمي بحقوق النشر ولا يوجد له ترخيص مفتوح، لذلك لا يمكن تشغيله داخل التطبيق بدون إذن أصحاب الحقوق. الدعاء هنا نص فقط.</div>
   </div>
-  <div class="foot">الأذان (كلها من Wikimedia Commons): صباح فخري (ملك عام)؛ Adhan.ogg بواسطة Aishatu98 وBeautiful adhan.ogg بواسطة Adam-synagda (CC0)؛ Azan.ogg بواسطة Andrewler، The Adhan بواسطة Aaqib Azeez، Islamic call to worship بواسطة Mahfoudou، AzaanMaahur.ogg بواسطة Saeed Hatamzadeh-Varmazyar (CC BY-SA 4.0)؛ تسجيل المسجد النبوي بواسطة ejaz215 (CC BY 3.0). الأذانات المصرية (القاهرة) تسجيلات ميدانية من Freesound: حديقة الأزهر وخان الخليلي (CC0)، والمعادي ١ و٢ بواسطة AhmadAiuby (CC BY 4.0). وأذان فجر مكة من archive.org (CC0 حسب ما كتبه من رفعه). هي تسجيلات لمساجد حقيقية بصوت الشارع ولا نعرف أسماء المؤذنين.<br>التلاوات والإذاعات: mp3quran.net (qurango.net). نص المصحف: alquran.cloud (رواية حفص).</div>
+  <div class="foot">الأذان (كلها من Wikimedia Commons): صباح فخري (ملك عام)؛ Adhan.ogg بواسطة Aishatu98 وBeautiful adhan.ogg بواسطة Adam-synagda (CC0)؛ Azan.ogg بواسطة Andrewler، The Adhan بواسطة Aaqib Azeez، Islamic call to worship بواسطة Mahfoudou، AzaanMaahur.ogg بواسطة Saeed Hatamzadeh-Varmazyar (CC BY-SA 4.0)؛ تسجيل المسجد النبوي بواسطة ejaz215 (CC BY 3.0). الأذانات المصرية (القاهرة) تسجيلات ميدانية من Freesound: حديقة الأزهر وخان الخليلي (CC0)، والمعادي ١ و٢ بواسطة AhmadAiuby (CC BY 4.0). وأذان فجر مكة من archive.org (CC0 حسب ما كتبه من رفعه). هي تسجيلات لمساجد حقيقية بصوت الشارع ولا نعرف أسماء المؤذنين.<br>التلاوات والإذاعات: mp3quran.net (qurango.net). نص المصحف (رواية حفص، تقسيم صفحات المصحف المدني ٦٠٤ صفحة): Tanzil Project، رخصة CC BY 3.0، النص كما هو بدون تعديل، tanzil.net.</div>
 </section>
 <div id="bar">
   <div class="r1"><div class="tt" id="btt"></div><button id="bx">✕</button></div>
@@ -483,37 +497,63 @@ function surahs(){
 // ---------- mushaf ----------
 var mushInit=false;
 var BSM="بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
+var QD=null,curP=+localStorage.getItem("nedaa_page")||1;
+var qq=null;
+function loadQ(cb,err){
+  if(QD){cb();return}
+  if(qq){qq.push([cb,err]);return}
+  qq=[[cb,err]];
+  var s=document.createElement("script");s.src="q.js";
+  s.onload=function(){var L=qq;qq=null;if(window.QD){QD=window.QD;L.forEach(function(x){x[0]()})}else L.forEach(function(x){x[1]()})};
+  s.onerror=function(){var L=qq;qq=null;L.forEach(function(x){x[1]()})};document.head.appendChild(s);
+}
 function initMush(){
   if(mushInit)return;mushInit=true;listMush();
 }
+function qerr(){document.getElementById("mush").innerHTML='<div class="msg">تعذر تحميل المصحف. أعد المحاولة.</div>';mushInit=false}
 function listMush(){
   var m=document.getElementById("mush");m.innerHTML='<div class="msg">جاري التحميل...</div>';
-  surahs().then(function(S){
-    var h='<div class="card">';
-    S.forEach(function(x){h+='<div class="item" data-n="'+x.number+'"><span>'+ad(x.number)+". "+esc(x.name.replace("سُورَةُ ","").replace("سورة ",""))+'</span><small>'+ad(x.numberOfAyahs)+" آية • "+(x.revelationType==="Meccan"?"مكية":"مدنية")+"</small></div>"});
+  loadQ(function(){
+    var h='<div class="card"><div class="item" id="mcont" style="border:0"><span>📖 متابعة القراءة (صفحة '+ad(curP)+')</span><small>›</small></div>'+
+      '<div class="tg" style="margin:8px 0"><span>اذهب إلى صفحة</span><span><input type="number" id="mgo" min="1" max="604" placeholder="١-٦٠٤" class="s" style="width:90px"> <button class="btn" id="mgob" style="padding:8px 14px">اذهب</button></span></div></div><div class="card">';
+    QD.names.forEach(function(nm,i){h+='<div class="item" data-n="'+(i+1)+'"><span>'+ad(i+1)+". "+esc(nm)+'</span><small>صفحة '+ad(QD.first[i])+"</small></div>"});
     m.innerHTML=h+"</div>";
-    m.querySelectorAll(".item").forEach(function(e){e.onclick=function(){readSurah(+e.dataset.n)}});
-    var last=+localStorage.getItem("nedaa_last");
-    if(last){var c=document.createElement("div");c.className="card";c.innerHTML='<div class="item" style="border:0">متابعة القراءة من سورة '+esc(S[last-1].name)+' ›</div>';c.firstChild.onclick=function(){readSurah(last)};m.insertBefore(c,m.firstChild)}
-  }).catch(function(){m.innerHTML='<div class="msg">تعذر التحميل. تأكد من الإنترنت ثم أعد المحاولة.</div>'});
+    m.querySelectorAll(".item[data-n]").forEach(function(e){e.onclick=function(){readSurah(+e.dataset.n)}});
+    document.getElementById("mcont").onclick=function(){openPage(curP)};
+    document.getElementById("mgob").onclick=function(){var v=+document.getElementById("mgo").value;if(v>=1&&v<=604)openPage(v)};
+  },qerr);
 }
-function readSurah(n){
-  var m=document.getElementById("mush");m.innerHTML='<div class="msg">جاري التحميل...</div>';window.scrollTo(0,0);
-  localStorage.setItem("nedaa_last",n);
-  jget("https://api.alquran.cloud/v1/surah/"+n+"/quran-uthmani").then(function(j){
-    var d=j.data,h='<div class="card"><button class="back" id="mb">‹ القائمة</button><div class="bs" style="text-align:center;font-weight:700;font-size:22px;color:#0b4f40">'+esc(d.name)+'</div><div class="mush">';
-    if(n!==1&&n!==9)h+='<div class="bs">'+BSM+"</div>";
-    d.ayahs.forEach(function(a,i){
-      var t=a.text.replace(/^\uFEFF/,"");
-      if(n!==1&&i===0&&t.indexOf("بِسْمِ")===0){t=t.split(" ").slice(4).join(" ")}
-      h+=t+' <span class="an">﴿'+ad(a.numberInSurah)+"﴾</span> ";
-    });
-    h+='</div><div style="display:flex;gap:8px;margin-top:14px">'+(n<114?'<button class="btn" id="mn" style="flex:1">السورة التالية</button>':"")+(n>1?'<button class="btn" id="mp" style="flex:1;background:#b8902b">السابقة</button>':"")+"</div></div>";
-    m.innerHTML=h;
+function readSurah(n){loadQ(function(){openPage(QD.first[n-1])},qerr)}
+function pageHtml(p){
+  var h="";
+  QD.pages[p-1].forEach(function(a){
+    var t=a[2],n=a[0];
+    if(a[1]===1){
+      h+='<div class="sh">سورة '+esc(QD.names[n-1])+"</div>";
+      if(n!==1&&n!==9){h+='<div class="bs">'+BSM+"</div>";if(t.indexOf("بِسْمِ")===0)t=t.split(" ").slice(4).join(" ")}
+    }
+    h+=esc(t)+' <span class="an">﴿'+ad(a[1])+"﴾</span> ";
+  });
+  return h;
+}
+function openPage(p,dir){
+  loadQ(function(){
+    p=Math.max(1,Math.min(604,p));curP=p;localStorage.setItem("nedaa_page",p);
+    var m=document.getElementById("mush"),first=QD.pages[p-1][0],ns=QD.names[first[0]-1];
+    var jz=Math.min(30,Math.max(1,Math.ceil(p/20.2)));
+    m.innerHTML='<div class="card" id="pgc"><div style="display:flex;justify-content:space-between;align-items:center"><button class="back" id="mb">‹ السور</button><span class="hint">'+esc(ns)+'</span><span class="hint">صفحة '+ad(p)+' / '+ad(604)+'</span></div>'+
+      '<div class="mush pg" id="pgt">'+pageHtml(p)+'</div>'+
+      '<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="pn" style="flex:1">› التالية</button><button class="btn" id="pp" style="flex:1;background:#b8902b">‹ السابقة</button></div>'+
+      '<div class="hint" style="text-align:center;margin-top:8px">اسحب لليسار للصفحة التالية ولليمين للسابقة</div></div>';
+    var t=document.getElementById("pgt");if(dir){t.style.animation=(dir>0?"slL":"slR")+" .25s"}
+    window.scrollTo(0,0);
     document.getElementById("mb").onclick=listMush;
-    var x=document.getElementById("mn");if(x)x.onclick=function(){readSurah(n+1)};
-    x=document.getElementById("mp");if(x)x.onclick=function(){readSurah(n-1)};
-  }).catch(function(){m.innerHTML='<div class="msg">تعذر التحميل. تأكد من الإنترنت.</div>'});
+    document.getElementById("pn").onclick=function(){openPage(p+1,1)};
+    document.getElementById("pp").onclick=function(){openPage(p-1,-1)};
+    var c=document.getElementById("pgc"),x0=0,y0=0;
+    c.addEventListener("touchstart",function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+    c.addEventListener("touchend",function(e){var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0)openPage(p+1,1);else openPage(p-1,-1)}},{passive:true});
+  },qerr);
 }
 // ---------- listen ----------
 var RECS=null,lInit=false;
@@ -585,29 +625,92 @@ var MUEZ=[["adhan/a2.mp3","صباح فخري (سوريا، ملك عام)","Wiki
 ["adhan/a12.mp3","القاهرة: خان الخليلي (تسجيل قصير)","Freesound: 3bagbrew، CC0"],
 ["adhan/a13.mp3","أذان فجر مكة المكرمة (تسجيل)","archive.org: 28MayFajrAdhanMakkah، CC0 حسب المرفوع"]];
 var IBT=[["adhan/i1.mp3","ألا في سبيل الله، الشيخ سيد الصفتي (مصر، قديم)"],["adhan/i2.mp3","موشح لما بدا يتثنى، الشيخ سيد الصفتي (مصر، قديم)"],["adhan/i3.mp3","ابتهال قبل الفجر (اليمن)"],["adhan/i4.mp3","الحمد لله، إنشاد بدون موسيقى (SyedsLife)"]];
-(function(){var b=document.getElementById("ibtlist"),s="";IBT.forEach(function(x,i){s+='<div class="item" data-i="'+i+'"><span>'+x[1]+'</span><small>▶</small></div>'});b.innerHTML=s;function go(i){var x=IBT[i];b.querySelectorAll(".item").forEach(function(z,k){z.classList.toggle("pl",k===i)});play(x[0],x[1],{next:function(){go((i+1)%IBT.length)},prev:function(){go((i+IBT.length-1)%IBT.length)}})}
-b.querySelectorAll(".item").forEach(function(e){e.onclick=function(){b.querySelectorAll(".item").forEach(function(z){z.classList.remove("pl")});e.classList.add("pl");go(+e.dataset.i)}})})();
+function drawIbt(){var L=IBT.concat(UA.filter(function(x){return x.kind==="ibt"&&uaUrl[x.id]}).map(function(x){return[uaUrl[x.id],x.name+" (من صوتياتي)"]}));
+var b=document.getElementById("ibtlist"),s="";L.forEach(function(x,i){s+='<div class="item" data-i="'+i+'"><span>'+esc(x[1])+'</span><small>▶</small></div>'});b.innerHTML=s;
+function go(i){var x=L[i];b.querySelectorAll(".item").forEach(function(z,k){z.classList.toggle("pl",k===i)});play(x[0],x[1],{next:function(){go((i+1)%L.length)},prev:function(){go((i+L.length-1)%L.length)}})}
+b.querySelectorAll(".item").forEach(function(e){e.onclick=function(){go(+e.dataset.i)}})}
+// ---------- user audio ----------
+var UA=[];try{UA=JSON.parse(localStorage.getItem("nedaa_ua"))||[]}catch(e){}
+var uaUrl={},NAT=!!window.NedaaNative;
+function uaSave(){localStorage.setItem("nedaa_ua",JSON.stringify(UA))}
+function uaFile(x){return x.id+x.ext}
+var IDBP=null;
+function idb(){if(!IDBP)IDBP=new Promise(function(res,rej){var r=indexedDB.open("nedaa-user",1);r.onupgradeneeded=function(){r.result.createObjectStore("f")};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}});return IDBP}
+function idbOp(mode,fn){return idb().then(function(d){return new Promise(function(res,rej){var t=d.transaction("f",mode),rq=fn(t.objectStore("f"));t.oncomplete=function(){res(rq&&rq.result)};t.onerror=function(){rej(t.error)};t.onabort=function(){rej(t.error)}})})}
+function nativeSave(x,file){
+  return new Promise(function(res,rej){var off=0,CH=393216,first=true;
+    function next(){if(off>=file.size){res();return}
+      var fr=new FileReader();fr.onload=function(){try{var b64=String(fr.result).split(",")[1]||"";window.NedaaNative.saveChunk(uaFile(x),first,b64);first=false;off+=CH;setTimeout(next,0)}catch(e){rej(e)}};
+      fr.onerror=function(){rej(fr.error)};fr.readAsDataURL(file.slice(off,off+CH))}
+    next()})}
+function uaLoad(x){
+  if(NAT){try{uaUrl[x.id]="file://"+window.NedaaNative.path(uaFile(x));return Promise.resolve()}catch(e){return Promise.resolve()}}
+  return idbOp("readonly",function(s){return s.get(x.id)}).then(function(bl){if(bl)uaUrl[x.id]=URL.createObjectURL(bl)}).catch(function(){});
+}
+function uaDel(id){
+  var x=UA.filter(function(z){return z.id===id})[0];if(!x)return;
+  UA=UA.filter(function(z){return z.id!==id});uaSave();delete uaUrl[id];
+  if(NAT){try{window.NedaaNative.del(uaFile(x))}catch(e){}}else idbOp("readwrite",function(s){return s.delete(id)}).catch(function(){});
+  if(ST.duaAudio===id)ST.duaAudio="";
+  refreshUA();save();
+}
+function uaName(f){return f.name.replace(/\.[^.]+$/,"").slice(0,60)||"صوت"}
+function uaExt(f){var m=/\.([A-Za-z0-9]{2,5})$/.exec(f.name);return m?"."+m[1].toLowerCase():".mp3"}
+$("uabtn").onclick=function(){$("uafile").click()};
+$("uafile").onchange=function(){
+  var files=Array.prototype.slice.call(this.files||[]),kind=$("uakind").value,st=$("uast"),inp=this;
+  if(!files.length)return;
+  var p=Promise.resolve(),n=0;
+  files.forEach(function(f){p=p.then(function(){
+    st.textContent="جاري حفظ: "+f.name;
+    var x={id:"u"+Date.now().toString(36)+Math.floor(Math.random()*1e4),name:uaName(f),kind:kind,ext:uaExt(f)};
+    return (NAT?nativeSave(x,f):idbOp("readwrite",function(s){return s.put(f,x.id)})).then(function(){UA.push(x);uaSave();return uaLoad(x)}).then(function(){n++})
+  })});
+  p.then(function(){st.textContent="تم حفظ "+ad(n)+" ملف على جهازك";inp.value="";refreshUA();save()}).catch(function(){st.textContent="تعذر حفظ الملف (ربما المساحة ممتلئة)";inp.value="";refreshUA()});
+};
+var KL={adhan:"مؤذن",dua:"دعاء",ibt:"ابتهال"};
+function refreshUA(){
+  var b=$("ualist"),s="";
+  UA.forEach(function(x){s+='<div class="item" style="gap:8px"><span style="flex:1">'+esc(x.name)+' <small>('+KL[x.kind]+')</small></span><button data-p="'+x.id+'" style="border:0;background:#0b4f40;color:#fff;border-radius:8px;padding:6px 10px">▶</button><button data-d="'+x.id+'" style="border:0;background:#a33;color:#fff;border-radius:8px;padding:6px 10px">✕</button></div>'});
+  b.innerHTML=s||'<div class="hint">لا توجد ملفات بعد</div>';
+  b.querySelectorAll("button[data-p]").forEach(function(e){e.onclick=function(){var x=UA.filter(function(z){return z.id===e.dataset.p})[0];if(x&&uaUrl[x.id])play(uaUrl[x.id],x.name,{})}});
+  b.querySelectorAll("button[data-d]").forEach(function(e){e.onclick=function(){if(confirm("حذف هذا الملف من جهازك؟"))uaDel(e.dataset.d)}});
+  if(typeof fillSelects==="function")fillSelects();
+  drawIbt();
+}
 var PR=["fajr","dhuhr","asr","maghrib","isha"];
 var DUA="اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ";
-var ST={adh:false,mz:0,pm:{fajr:-1,dhuhr:-1,asr:-1,maghrib:-1,isha:-1},pre:10,dua:true,azk:false,am:"06:00",pmT:"17:30",qym:false};
+var ST={duaAudio:"",adh:false,mz:0,pm:{fajr:-1,dhuhr:-1,asr:-1,maghrib:-1,isha:-1},pre:10,dua:true,azk:false,am:"06:00",pmT:"17:30",qym:false};
 try{var s1=JSON.parse(localStorage.getItem("nedaa_st"));if(s1)for(var kk in s1)ST[kk]=s1[kk]}catch(e){}
 if(localStorage.getItem("nedaa_adhan")==="1"&&!localStorage.getItem("nedaa_st")){ST.adh=true;ST.mz=+(localStorage.getItem("nedaa_muez")||0)}
 function $(i){return document.getElementById(i)}
 var adh=$("adh"),msel=$("muez"),psel=$("pre"),dtg=$("duat"),azt=$("azk"),amt=$("amt"),pmt=$("pmt"),qyt=$("qym");
-function save(){ST.adh=adh.checked;ST.mz=+msel.value;ST.pre=+psel.value;ST.dua=dtg.checked;ST.azk=azt.checked;ST.am=amt.value||"06:00";ST.pmT=pmt.value||"17:30";ST.qym=qyt.checked;
+function save(){ST.adh=adh.checked;ST.mz=mv(msel.value);ST.pre=+psel.value;ST.dua=dtg.checked;ST.azk=azt.checked;ST.am=amt.value||"06:00";ST.pmT=pmt.value||"17:30";ST.qym=qyt.checked;
   localStorage.setItem("nedaa_st",JSON.stringify(ST));pushNative();if(adh.checked||ST.pre>0||ST.azk||ST.qym)askNotif()}
-MUEZ.forEach(function(m,i){var o=document.createElement("option");o.value=i;o.textContent=m[1];msel.appendChild(o)});
-var pmh="";PR.forEach(function(k){pmh+='<div class="tg"><span>'+NAMES[k]+'</span><select class="s" data-k="'+k+'"><option value="-1">نفس المؤذن الافتراضي</option>'+MUEZ.map(function(m,i){return'<option value="'+i+'">'+m[1]+"</option>"}).join("")+"</select></div>"});
+function mv(v){v=String(v);return v==="-1"?-1:(v[0]==="u"?v:+v)}
+function muOpts(){var o=MUEZ.map(function(m,i){return[i,m[1]]});UA.forEach(function(x){if(x.kind==="adhan"&&uaUrl[x.id])o.push(["u"+x.id.slice(1),x.name+" (من صوتياتي)"])});return o}
+function muSrc(v){v=mv(v);if(typeof v==="string"){var id=v;var u=uaUrl[id];if(u)return u;v=0}return MUEZ[v>=0&&MUEZ[v]?v:0][0]}
+function muValid(v){v=mv(v);if(typeof v==="string")return!!uaUrl[v];return v===-1||!!MUEZ[v]}
+function fillSelects(){
+  var o=muOpts(),opt=function(a){return a.map(function(x){return'<option value="'+x[0]+'">'+esc(x[1])+"</option>"}).join("")};
+  msel.innerHTML=opt(o);msel.value=muValid(ST.mz)&&ST.mz!==-1?ST.mz:0;
+  $("pm").querySelectorAll("select").forEach(function(s){s.innerHTML='<option value="-1">نفس المؤذن الافتراضي</option>'+opt(o);var v=ST.pm[s.dataset.k];s.value=muValid(v)?v:-1});
+  var d=$("duaaud");d.innerHTML='<option value="">بدون صوت</option>'+UA.filter(function(x){return x.kind==="dua"&&uaUrl[x.id]}).map(function(x){return'<option value="'+x.id+'">'+esc(x.name)+"</option>"}).join("");d.value=ST.duaAudio&&uaUrl[ST.duaAudio]?ST.duaAudio:"";
+}
+var pmh="";PR.forEach(function(k){pmh+='<div class="tg"><span>'+NAMES[k]+'</span><select class="s" data-k="'+k+'"></select></div>'});
 $("pm").innerHTML=pmh;
-$("pm").querySelectorAll("select").forEach(function(s){s.value=ST.pm[s.dataset.k];s.onchange=function(){ST.pm[s.dataset.k]=+s.value;save()}});
-adh.checked=ST.adh;msel.value=ST.mz;psel.value=ST.pre;dtg.checked=ST.dua;azt.checked=ST.azk;amt.value=ST.am;pmt.value=ST.pmT;qyt.checked=ST.qym;
+$("pm").querySelectorAll("select").forEach(function(s){s.onchange=function(){ST.pm[s.dataset.k]=mv(s.value);save()}});
+fillSelects();
+adh.checked=ST.adh;psel.value=ST.pre;dtg.checked=ST.dua;azt.checked=ST.azk;amt.value=ST.am;pmt.value=ST.pmT;qyt.checked=ST.qym;
+$("duaaud").addEventListener("change",function(){ST.duaAudio=$("duaaud").value;save()});
 [adh,msel,psel,dtg,azt,amt,pmt,qyt].forEach(function(e){e.addEventListener("change",save)});
-function mzFor(k){var v=ST.pm[k];return v>=0?v:ST.mz}
+function mzFor(k){var v=ST.pm[k];return(v!==-1&&muValid(v))?v:(muValid(ST.mz)?ST.mz:0)}
 var adhanAudio=new Audio(),curK=null;
-adh.addEventListener("change",function(){if(adh.checked){adhanAudio.src=MUEZ[+msel.value][0];adhanAudio.volume=0;adhanAudio.play().then(function(){adhanAudio.pause();adhanAudio.volume=1}).catch(function(){adhanAudio.volume=1})}});
+adh.addEventListener("change",function(){if(adh.checked){adhanAudio.src=muSrc(msel.value);adhanAudio.volume=0;adhanAudio.play().then(function(){adhanAudio.pause();adhanAudio.volume=1}).catch(function(){adhanAudio.volume=1})}});
 var adhPlaying=false;
-function playAdhan(k){curK=k||null;adhanAudio.src=MUEZ[k?mzFor(k):+msel.value][0];adhanAudio.currentTime=0;adhanAudio.volume=1;adhanAudio.play().catch(function(){});$("adhtest").textContent="⏹ إيقاف الأذان";adhPlaying=true}
-function stopAdhan(done){adhanAudio.pause();$("adhtest").textContent="تجربة الأذان";adhPlaying=false;if(done===true&&ST.dua)showDua()}
+function playAdhan(k){curK=k||null;adhanAudio.src=muSrc(k?mzFor(k):msel.value);adhanAudio.currentTime=0;adhanAudio.volume=1;adhanAudio.play().catch(function(){});$("adhtest").textContent="⏹ إيقاف الأذان";adhPlaying=true}
+var duaPl=new Audio();
+function stopAdhan(done){adhanAudio.pause();$("adhtest").textContent="تجربة الأذان";adhPlaying=false;duaPl.pause();if(done===true){if(ST.dua)showDua();if(ST.duaAudio&&uaUrl[ST.duaAudio]){duaPl.src=uaUrl[ST.duaAudio];duaPl.play().catch(function(){})}}}
 adhanAudio.onended=function(){stopAdhan(true)};
 $("adhtest").onclick=function(){adhPlaying?stopAdhan():playAdhan()};
 function showDua(){$("duabox").style.display="block"}
@@ -650,8 +753,10 @@ function notify(title,body){
 }
 function pushNative(){
   if(!window.NedaaNative)return;
-  var n=Date.now(),ev=buildEvents(7).filter(function(e){return e.t>n}).map(function(e){return[e.t,e.ty,e.title,e.body,e.mz]});
-  try{window.NedaaNative.schedule(JSON.stringify(ev),ev.length>0,ST.mz)}catch(e){}
+  var n=Date.now(),nm=function(v){if(typeof v==="string"){var x=UA.filter(function(z){return"u"+z.id.slice(1)===v})[0];return x?"f:"+uaFile(x):"0"}return String(v)},
+    dn=function(){var x=UA.filter(function(z){return z.id===ST.duaAudio})[0];return x?"f:"+uaFile(x):""},
+    ev=buildEvents(7).filter(function(e){return e.t>n}).map(function(e){return[e.t,e.ty,e.title,e.body,e.ty==="adhan"?nm(e.mz):"0",e.ty==="adhan"?dn():""]});
+  try{window.NedaaNative.schedule(JSON.stringify(ev),ev.length>0,0)}catch(e){}
 }
 var firedS={};
 setInterval(function(){
@@ -663,6 +768,7 @@ setInterval(function(){
       if(e.ty==="adhan")playAdhan(e.k);else notify(e.title,e.body)}});
 },5000);
 compute();tick();rot();renderAz();pushNative();
+refreshUA();Promise.all(UA.map(uaLoad)).then(function(){refreshUA();pushNative()});
 setInterval(tick,1000);
 setInterval(function(){if(ymd(Date.now(),loc.tz).join("-")!==dayKey)compute()},30000);
 (function(){var h=location.hash.replace("#","").split("/");if(h[0]&&h[1]){show(h[0],h[1]);if(h[2])readSurah(+h[2])}})();
