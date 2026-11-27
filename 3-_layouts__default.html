@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% assign t = page.title | default: site.title %}
+{% assign d = page.summary | default: site.description %}
+<title>{% if page.title and page.layout == "sermon" %}{{ page.title }} | {{ site.title }}{% else %}نداء المنابر: مكتبة خطب الجمعة مكتوبة حسب الموضوع{% endif %}</title>
+<meta name="description" content="{{ d | strip_html | normalize_whitespace | escape }}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ page.url | absolute_url | replace: 'index.html', '' }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:site_name" content="نداء المنابر">
+<meta property="og:title" content="{{ t | escape }}">
+<meta property="og:description" content="{{ d | strip_html | normalize_whitespace | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url | replace: 'index.html', '' }}">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0f4d3a">
+<link rel="preload" href="amiri-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="card">
+<header class="hero"><p class="bism">بسم الله الرحمن الرحيم</p><h1 class="title"><a href="index.html">نداء المنابر</a></h1><p class="sub">مكتبة خطب الجمعة وكتب الخطب</p><span class="orn" aria-hidden="true"></span></header>
+<nav class="nav" aria-label="أقسام الموقع"><a href="index.html"{% if page.layout == "sermon" or page.url == "/" %} aria-current="page"{% endif %}>الخطب</a><a href="books.html">الكتب</a></nav>
+<main>
+{{ content }}
+</main>
+<p class="foot">﴿ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ﴾</p>
+<p class="note">الخطب المكتوبة هنا مسودات تحتاج مراجعة عالم أو إمام قبل الإلقاء.</p>
+</div>
+{% if page.url == "/" %}<script src="search.js"></script>{% endif %}
+</body>
+</html>

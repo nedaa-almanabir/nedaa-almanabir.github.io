@@ -1,0 +1,7 @@
+---
+layout: default
+---
+<p class="topic">{{ page.topic }}</p><h2>{{ page.title }}</h2>{% if page.minutes %}<p class="meta">المدة التقريبية: {{ page.minutes }} دقيقة</p>{% endif %}
+{{ content }}
+{% if page.needs_review %}<p class="callout">الخطبة مكتوبة بمساعدة مساعد آلي. يُرجى مراجعتها وضبط الآيات والأحاديث عند عالم أو إمام قبل إلقائها.</p>{% endif %}
+<p><a class="btn" href="index.html">العودة إلى المكتبة</a></p>

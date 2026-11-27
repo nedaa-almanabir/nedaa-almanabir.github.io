@@ -1,0 +1,37 @@
+media: false
+content:
+  - name: sermons
+    label: الخطب
+    type: collection
+    path: _sermons
+    filename: "{year}{month}{day}-{hour}{minute}{second}.md"
+    view:
+      primary: title
+      fields: [title, topic]
+      sort: [title]
+    fields:
+      - name: title
+        label: عنوان الخطبة
+        type: string
+        required: true
+      - name: topic
+        label: الموضوع
+        type: select
+        required: true
+        options:
+          values: [الأخلاق, الأسرة, الإيمان, العبادات, السيرة, المعاملات, مناسبات, أخرى]
+      - name: summary
+        label: ملخص قصير (سطر واحد)
+        type: text
+        required: true
+      - name: minutes
+        label: المدة بالدقائق
+        type: number
+      - name: needs_review
+        label: تحتاج مراجعة عالم أو إمام (تظهر ملاحظة في آخر الصفحة)
+        type: boolean
+      - name: body
+        label: نص الخطبة
+        type: rich-text
+        options:
+          format: markdown

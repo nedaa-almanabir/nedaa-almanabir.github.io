@@ -1,0 +1,12 @@
+title: نداء المنابر
+description: مكتبة لخطب الجمعة مكتوبة ومرتبة حسب الموضوع مع بحث، وكتب خطب من الملك العام تُقرأ على الموقع.
+url: https://nedaa-almanabir.github.io
+lang: ar
+plugins:
+  - jekyll-sitemap
+collections:
+  sermons:
+    output: true
+    permalink: /khutba-:name.html
+exclude:
+  - README.md
