@@ -1,4 +1,4 @@
-var C="nedaa-v14",F=["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png","favicon.png","q.js","img/p1.jpg","img/p2.jpg","img/p3.jpg","img/p4.jpg","img/p5.jpg","img/p6.jpg","img/p7.jpg"];
+var C="nedaa-v15",F=["./","index.html","manifest.webmanifest","icon-192.png","icon-512.png","favicon.png","q.js","img/p1.jpg","img/p2.jpg","img/p3.jpg","img/p4.jpg","img/p5.jpg","img/p6.jpg","img/p7.jpg"];
 self.addEventListener("install",function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(F)}));self.skipWaiting()});
 self.addEventListener("activate",function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==C&&x.indexOf("nedaa-v")===0}).map(function(x){return caches.delete(x)}))}));self.clients.claim()});
 self.addEventListener("fetch",function(e){
