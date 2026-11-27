@@ -161,12 +161,10 @@ body{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 </section>
 <section class="tab" id="t-ibt" data-g="more">
   <div class="card">
-    <b>ابتهالات وتواشيح</b>
-    <p class="hint">هذه الروابط تفتح مكتبة archive.org لتسمعها هناك. لا نستضيف نحن أي تسجيلات.</p>
-    <div class="item"><a href="https://archive.org/details/ibtihalat-na9shbandi" target="_blank" rel="noopener">ابتهالات النقشبندي</a></div>
-    <div class="item"><a href="https://archive.org/details/naqshabandi_adaook" target="_blank" rel="noopener">ألبوم أدعوك للنقشبندي</a></div>
-    <div class="item"><a href="https://archive.org/details/EbthalNkshbndeeMMostfa" target="_blank" rel="noopener">ابتهالات النقشبندي ومحمد مصطفى</a></div>
-    <div class="item"><a href="https://archive.org/details/54696850" target="_blank" rel="noopener">تواشيح</a></div>
+    <b>إنشاد وابتهالات (تشغيل داخل التطبيق)</b>
+    <p class="hint">كل المقاطع هنا مرخّصة أو ملك عام وتعمل بدون روابط خارجية. ابتهالات النقشبندي وتواشيح المشاهير محمية بحقوق نشر ولا نستطيع تضمينها بدون إذن أصحابها.</p>
+    <div id="ibtlist"></div>
+    <div class="hint" style="margin-top:8px">المصادر: ١ و٢ تسجيلات قديمة (حوالي ١٩٠٧ إلى ١٩٢٥) للشيخ سيد الصفتي، ملك عام، Wikimedia Commons. ٣: Praise God before dawn بواسطة Yyaabb (CC BY-SA 4.0). ٤: Alhamdulilah (vocal only nasheed) بواسطة SyedsLife (CC BY).</div>
   </div>
   <div class="card"><div class="tg"><span>تشغيل الأذان عند دخول الوقت</span><input type="checkbox" id="adh" style="width:26px;height:26px"></div>
     <div class="hint" id="bgnote">في المتصفح يعمل والتطبيق مفتوح فقط. نسخة الأندرويد (APK) تشغل الأذان والتنبيهات حتى والتطبيق مقفول.</div>
@@ -188,12 +186,9 @@ body{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   <div class="card"><b>دعاء بعد الأذان</b>
     <div class="tg"><span>إظهار الدعاء بعد انتهاء الأذان</span><input type="checkbox" id="duat" style="width:26px;height:26px"></div>
     <p id="duatxt2" style="font-size:19px;line-height:2;text-align:center;color:#0b4f40"></p>
-    <div class="hint">نص الدعاء الوارد في الحديث الصحيح (رواه البخاري). تسجيل الشيخ الشعراوي حقوقه لأصحابه، لذلك لا نستضيفه ولا نضمّنه. الروابط التالية تفتح صفحات خارجية تنشره (مرفوعة من جهات لا نملكها ولا نضمن بقاءها):</div>
-    <div class="item"><a href="https://www.youtube.com/watch?v=drXfYzCj6WM" target="_blank" rel="noopener">▶ دعاء الشعراوي بعد الأذان (يوتيوب)</a></div>
-    <div class="item"><a href="https://www.myhuda.com/main-menue/audio/sharawy/duaa/%D8%AF%D8%B9%D8%A7%D8%A1-%D9%85%D8%A7-%D8%A8%D8%B9%D8%AF-%D8%A7%D9%84%D8%A2%D8%B0%D8%A7%D9%86-%D8%AF%D8%B9%D8%A7%D8%A1-%D9%84%D9%84%D8%B4%D9%8A%D8%AE-%D8%A7%D9%84%D8%B4%D8%B9%D8%B1%D8%A7%D9%88%D9%89/" target="_blank" rel="noopener">▶ دعاء ما بعد الآذان (myhuda.com)</a></div>
-    <div class="item"><a href="http://www.sharawe.com/play-1195.html" target="_blank" rel="noopener">▶ دعاء ما بعد الآذان (sharawe.com)</a></div>
+    <div class="hint">نص الدعاء الوارد في الحديث الصحيح (رواه البخاري). تسجيل الشيخ الشعراوي لهذا الدعاء محمي بحقوق النشر ولا يوجد له ترخيص مفتوح، لذلك لا يمكن تشغيله داخل التطبيق بدون إذن أصحاب الحقوق. الدعاء هنا نص فقط.</div>
   </div>
-  <div class="foot">الأذان (كلها من Wikimedia Commons): صباح فخري (ملك عام)؛ Adhan.ogg بواسطة Aishatu98 وBeautiful adhan.ogg بواسطة Adam-synagda (CC0)؛ Azan.ogg بواسطة Andrewler، The Adhan بواسطة Aaqib Azeez، Islamic call to worship بواسطة Mahfoudou، AzaanMaahur.ogg بواسطة Saeed Hatamzadeh-Varmazyar (CC BY-SA 4.0)؛ تسجيل المسجد النبوي بواسطة ejaz215 (CC BY 3.0). لا يوجد بينها مؤذن مصري موثّق الترخيص.<br>التلاوات والإذاعات: mp3quran.net (qurango.net). نص المصحف: alquran.cloud (رواية حفص).</div>
+  <div class="foot">الأذان (كلها من Wikimedia Commons): صباح فخري (ملك عام)؛ Adhan.ogg بواسطة Aishatu98 وBeautiful adhan.ogg بواسطة Adam-synagda (CC0)؛ Azan.ogg بواسطة Andrewler، The Adhan بواسطة Aaqib Azeez، Islamic call to worship بواسطة Mahfoudou، AzaanMaahur.ogg بواسطة Saeed Hatamzadeh-Varmazyar (CC BY-SA 4.0)؛ تسجيل المسجد النبوي بواسطة ejaz215 (CC BY 3.0). الأذانات المصرية (القاهرة) تسجيلات ميدانية من Freesound: حديقة الأزهر وخان الخليلي (CC0)، والمعادي ١ و٢ بواسطة AhmadAiuby (CC BY 4.0). وأذان فجر مكة من archive.org (CC0 حسب ما كتبه من رفعه). هي تسجيلات لمساجد حقيقية بصوت الشارع ولا نعرف أسماء المؤذنين.<br>التلاوات والإذاعات: mp3quran.net (qurango.net). نص المصحف: alquran.cloud (رواية حفص).</div>
 </section>
 <div id="bar">
   <div class="r1"><div class="tt" id="btt"></div><button id="bx">✕</button></div>
@@ -210,7 +205,7 @@ body{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
   <button data-g="more" data-t="qibla"><span>☰</span>المزيد</button>
 </nav>
 
-<div id="duabox" style="display:none;position:fixed;left:12px;right:12px;bottom:90px;z-index:50;background:#0b4f40;color:#fff;border-radius:16px;padding:16px;box-shadow:0 6px 24px #0006;text-align:center"><div style="font-size:14px;opacity:.8;margin-bottom:6px">دعاء بعد الأذان</div><div id="duatxt" style="font-size:20px;line-height:2"></div><a href="https://www.youtube.com/watch?v=drXfYzCj6WM" target="_blank" rel="noopener" style="display:block;margin-top:10px;color:#ffe9a8;font-size:16px">▶ استمع لدعاء الشيخ الشعراوي (رابط خارجي)</a><button id="duax" style="margin-top:8px;background:#b8902b;color:#fff;border:0;border-radius:10px;padding:8px 22px;font-size:16px">آمين</button></div>
+<div id="duabox" style="display:none;position:fixed;left:12px;right:12px;bottom:90px;z-index:50;background:#0b4f40;color:#fff;border-radius:16px;padding:16px;box-shadow:0 6px 24px #0006;text-align:center"><div style="font-size:14px;opacity:.8;margin-bottom:6px">دعاء بعد الأذان</div><div id="duatxt" style="font-size:20px;line-height:2"></div><button id="duax" style="margin-top:8px;background:#b8902b;color:#fff;border:0;border-radius:10px;padding:8px 22px;font-size:16px">آمين</button></div>
 <div id="toast" style="display:none;position:fixed;left:12px;right:12px;top:12px;z-index:60;background:#b8902b;color:#fff;border-radius:12px;padding:12px;text-align:center;font-size:16px"></div>
 <script>
 "use strict";
@@ -583,7 +578,15 @@ var MUEZ=[["adhan/a2.mp3","صباح فخري (سوريا، ملك عام)","Wiki
 ["adhan/a5.mp3","أذان قصير (Aishatu98)","Wikimedia Commons: Adhan.ogg، CC0"],
 ["adhan/a6.mp3","أذان جميل (Adam-synagda)","Wikimedia Commons: Beautiful adhan.ogg، CC0"],
 ["adhan/a7.mp3","أذان المسجد النبوي (ejaz215)","Wikimedia Commons: call-to-prayer-from-the-prophet-s-mosque، CC BY 3.0"],
-["adhan/a8.mp3","أذان بمقام ماهور (Saeed Hatamzadeh)","Wikimedia Commons: AzaanMaahur.ogg، CC BY-SA 4.0"]];
+["adhan/a8.mp3","أذان بمقام ماهور (Saeed Hatamzadeh)","Wikimedia Commons: AzaanMaahur.ogg، CC BY-SA 4.0"],
+["adhan/a9.mp3","القاهرة: حديقة الأزهر (تسجيل ميداني)","Freesound: AhmadAiuby، CC0"],
+["adhan/a10.mp3","القاهرة: المعادي ١ (تسجيل ميداني)","Freesound: Adhan in Maadi by AhmadAiuby، CC BY 4.0"],
+["adhan/a11.mp3","القاهرة: المعادي ٢ (تسجيل ميداني)","Freesound: Pandemic Adhan - Maadi by AhmadAiuby، CC BY 4.0"],
+["adhan/a12.mp3","القاهرة: خان الخليلي (تسجيل قصير)","Freesound: 3bagbrew، CC0"],
+["adhan/a13.mp3","أذان فجر مكة المكرمة (تسجيل)","archive.org: 28MayFajrAdhanMakkah، CC0 حسب المرفوع"]];
+var IBT=[["adhan/i1.mp3","ألا في سبيل الله، الشيخ سيد الصفتي (مصر، قديم)"],["adhan/i2.mp3","موشح لما بدا يتثنى، الشيخ سيد الصفتي (مصر، قديم)"],["adhan/i3.mp3","ابتهال قبل الفجر (اليمن)"],["adhan/i4.mp3","الحمد لله، إنشاد بدون موسيقى (SyedsLife)"]];
+(function(){var b=document.getElementById("ibtlist"),s="";IBT.forEach(function(x,i){s+='<div class="item" data-i="'+i+'"><span>'+x[1]+'</span><small>▶</small></div>'});b.innerHTML=s;function go(i){var x=IBT[i];b.querySelectorAll(".item").forEach(function(z,k){z.classList.toggle("pl",k===i)});play(x[0],x[1],{next:function(){go((i+1)%IBT.length)},prev:function(){go((i+IBT.length-1)%IBT.length)}})}
+b.querySelectorAll(".item").forEach(function(e){e.onclick=function(){b.querySelectorAll(".item").forEach(function(z){z.classList.remove("pl")});e.classList.add("pl");go(+e.dataset.i)}})})();
 var PR=["fajr","dhuhr","asr","maghrib","isha"];
 var DUA="اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ";
 var ST={adh:false,mz:0,pm:{fajr:-1,dhuhr:-1,asr:-1,maghrib:-1,isha:-1},pre:10,dua:true,azk:false,am:"06:00",pmT:"17:30",qym:false};
